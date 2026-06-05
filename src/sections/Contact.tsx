@@ -87,34 +87,71 @@ export const Contact: React.FC = () => {
     return valid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
 
-    // Simulate API request dispatch
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      
-      // Celebrate successful submission with confetti
-      confetti({
-        particleCount: 150,
-        spread: 80,
-        colors: ['#06B6D4', '#8B5CF6', '#6366F1'],
-        origin: { y: 0.6 },
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "";
+
+    if (!accessKey) {
+      console.warn("VITE_WEB3FORMS_ACCESS_KEY environment variable is not defined. Falling back to simulated send.");
+      setTimeout(() => {
+        setIsSubmitting(false);
+        setIsSuccess(true);
+        confetti({
+          particleCount: 150,
+          spread: 80,
+          colors: ['#06B6D4', '#8B5CF6', '#6366F1'],
+          origin: { y: 0.6 },
+        });
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 5000);
+      }, 1500);
+      return;
+    }
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          subject: `Portfolio Message from ${formData.name}`,
+        }),
       });
 
-      // Reset form
-      setFormData({ name: '', email: '', message: '' });
-      
-      // Dismiss success screen after 5 seconds
-      setTimeout(() => {
-        setIsSuccess(false);
-      }, 5000);
+      const result = await response.json();
 
-    }, 1800);
+      if (response.ok && result.success) {
+        setIsSubmitting(false);
+        setIsSuccess(true);
+        confetti({
+          particleCount: 150,
+          spread: 80,
+          colors: ['#06B6D4', '#8B5CF6', '#6366F1'],
+          origin: { y: 0.6 },
+        });
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 5000);
+      } else {
+        throw new Error(result.message || "Failed to send message via Web3Forms.");
+      }
+    } catch (error: any) {
+      setIsSubmitting(false);
+      alert(error.message || "Failed to send message. Please try again or email directly.");
+    }
   };
 
   return (
