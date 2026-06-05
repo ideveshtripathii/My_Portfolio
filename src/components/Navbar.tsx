@@ -6,10 +6,11 @@ import { useScrollDirection } from '../hooks/useScrollDirection';
 const navLinks = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
+  { name: 'Experience', href: '#experience' },
   { name: 'Projects', href: '#projects' },
   { name: 'Tech Stack', href: '#skills' },
   { name: 'GitHub', href: '#github' },
-  { name: 'Experience', href: '#experience' },
+  { name: 'Technical Writing', href: '#writing' },
   { name: 'Contact', href: '#contact' },
 ];
 

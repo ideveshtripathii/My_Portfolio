@@ -7,10 +7,11 @@ import { LoadingScreen } from './components/LoadingScreen';
 import { Navbar } from './components/Navbar';
 import { Hero } from './sections/Hero';
 import { About } from './sections/About';
-import { TechStack } from './sections/TechStack';
-import { Projects } from './sections/Projects';
 import { Experience } from './sections/Experience';
+import { Projects } from './sections/Projects';
+import { TechStack } from './sections/TechStack';
 import { GithubStats } from './sections/GithubStats';
+import { Writing } from './sections/Writing';
 import { Contact } from './sections/Contact';
 import { Footer } from './sections/Footer';
 
@@ -30,10 +31,11 @@ function MainLayout() {
       <main className="relative z-10">
         <Hero />
         <About />
+        <Experience />
         <Projects />
         <TechStack />
         <GithubStats />
-        <Experience />
+        <Writing />
         <Contact />
       </main>
 
