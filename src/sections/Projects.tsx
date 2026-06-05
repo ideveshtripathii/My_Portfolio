@@ -120,7 +120,7 @@ export const Projects: React.FC = () => {
 
         {/* Filter Tabs */}
         <div className="flex justify-center overflow-x-auto pb-4 mb-12 gap-2 no-scrollbar px-1">
-          <div className="flex bg-[#111827] border border-white/5 p-1 rounded-2xl">
+          <div className="flex bg-slate-100 dark:bg-neutral-900 border border-slate-200 dark:border-white/5 p-1 rounded-2xl">
             {filterOptions.map((opt) => {
               const isActive = filter === opt.value;
               return (
@@ -128,8 +128,8 @@ export const Projects: React.FC = () => {
                   key={opt.value}
                   onClick={() => setFilter(opt.value)}
                   className={`px-5 py-2.5 rounded-xl text-xs font-semibold tracking-wider transition-all duration-300 whitespace-nowrap cursor-pointer ${isActive
-                    ? 'bg-white/10 text-white font-bold'
-                    : 'text-gray-400 hover:text-white'
+                    ? 'bg-white dark:bg-white/10 text-slate-900 dark:text-white font-bold shadow-sm'
+                    : 'text-slate-500 hover:text-slate-800 dark:text-gray-400 dark:hover:text-white'
                     }`}
                 >
                   {opt.label}

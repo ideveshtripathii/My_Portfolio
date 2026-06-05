@@ -167,7 +167,7 @@ export const Contact: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white dark:text-white light:text-gray-900"
+            className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white"
           >
             Get In <span className="text-brand-cyan">Touch</span>
           </motion.h2>
@@ -184,7 +184,7 @@ export const Contact: React.FC = () => {
           
           {/* Left Column: Direct Contact Info cards - Span 5 */}
           <div className="lg:col-span-5 flex flex-col gap-5">
-            <h3 className="text-xl font-bold text-white dark:text-white light:text-gray-800 text-left mb-2 tracking-tight">
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white text-left mb-2 tracking-tight">
               Contact Information
             </h3>
             
@@ -194,7 +194,7 @@ export const Contact: React.FC = () => {
                 href={info.link}
                 target={info.link.startsWith('http') ? '_blank' : undefined}
                 rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="p-5 rounded-2xl glass border border-white/5 dark:border-white/5 light:border-black/5 hover:border-white/10 dark:hover:border-white/10 light:hover:border-black/10 flex items-center gap-4 text-left shadow-lg transition-transform hover:scale-[1.02] group"
+                className="p-5 rounded-2xl glass flex items-center gap-4 text-left shadow-lg transition-transform hover:scale-[1.02] group"
               >
                 <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border ${
                   info.color === 'cyan'
@@ -209,7 +209,7 @@ export const Contact: React.FC = () => {
                   <span className="text-[10px] text-gray-500 font-mono uppercase tracking-wider block">
                     {info.name}
                   </span>
-                  <span className="text-sm font-semibold text-white dark:text-white light:text-gray-800 mt-1 block truncate group-hover:text-brand-cyan transition-colors">
+                  <span className="text-sm font-semibold text-slate-800 dark:text-white mt-1 block truncate group-hover:text-brand-cyan transition-colors">
                     {info.value}
                   </span>
                 </div>
@@ -218,7 +218,7 @@ export const Contact: React.FC = () => {
           </div>
 
           {/* Right Column: Contact Form - Span 7 */}
-          <div className="lg:col-span-7 glass border border-white/5 dark:border-white/5 light:border-black/5 p-8 rounded-3xl shadow-2xl relative">
+          <div className="lg:col-span-7 glass p-8 rounded-3xl shadow-2xl relative">
             
             <AnimatePresence mode="wait">
               {!isSuccess ? (
@@ -230,7 +230,7 @@ export const Contact: React.FC = () => {
                   exit={{ opacity: 0 }}
                   className="flex flex-col gap-6 text-left"
                 >
-                  <h3 className="text-xl font-bold text-white dark:text-white light:text-gray-800 tracking-tight">
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
                     Send a Message
                   </h3>
 
@@ -246,7 +246,7 @@ export const Contact: React.FC = () => {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Devesh Tripathi"
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 dark:bg-white/5 light:bg-black/5 border border-white/10 dark:border-white/10 light:border-black/10 focus:border-brand-cyan focus:outline-none text-sm text-white dark:text-white light:text-gray-800 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-100/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 focus:border-brand-cyan focus:outline-none text-sm text-slate-800 dark:text-white transition-colors"
                       disabled={isSubmitting}
                     />
                     {errors.name && <span className="text-[10px] font-mono text-red-500 mt-1">{errors.name}</span>}
@@ -264,7 +264,7 @@ export const Contact: React.FC = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="deveshbiksi@gmail.com"
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 dark:bg-white/5 light:bg-black/5 border border-white/10 dark:border-white/10 light:border-black/10 focus:border-brand-cyan focus:outline-none text-sm text-white dark:text-white light:text-gray-800 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-100/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 focus:border-brand-cyan focus:outline-none text-sm text-slate-800 dark:text-white transition-colors"
                       disabled={isSubmitting}
                     />
                     {errors.email && <span className="text-[10px] font-mono text-red-500 mt-1">{errors.email}</span>}
@@ -282,7 +282,7 @@ export const Contact: React.FC = () => {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Hi Devesh, I would love to discuss a project..."
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 dark:bg-white/5 light:bg-black/5 border border-white/10 dark:border-white/10 light:border-black/10 focus:border-brand-cyan focus:outline-none text-sm text-white dark:text-white light:text-gray-800 transition-colors resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-100/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 focus:border-brand-cyan focus:outline-none text-sm text-slate-800 dark:text-white transition-colors resize-none"
                       disabled={isSubmitting}
                     />
                     {errors.message && <span className="text-[10px] font-mono text-red-500 mt-1">{errors.message}</span>}
@@ -322,15 +322,15 @@ export const Contact: React.FC = () => {
                   <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center mb-6">
                     <CheckCircle size={32} />
                   </div>
-                  <h3 className="text-xl font-bold text-white dark:text-white light:text-gray-900 mb-2">
+                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
                     Message Dispatched!
                   </h3>
-                  <p className="text-sm text-gray-400 dark:text-gray-400 light:text-gray-600 max-w-sm leading-relaxed mb-6">
+                  <p className="text-sm text-gray-600 dark:text-gray-400 max-w-sm leading-relaxed mb-6">
                     Thank you for reaching out. Devesh will get back to you at your email address as soon as possible.
                   </p>
                   <button
                     onClick={() => setIsSuccess(false)}
-                    className="px-6 py-2.5 bg-white/5 dark:bg-white/5 light:bg-black/5 border border-white/10 dark:border-white/10 light:border-black/10 text-white dark:text-white light:text-gray-800 text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-white/10 dark:hover:bg-white/10 light:hover:bg-black/10 transition-colors cursor-pointer"
+                    className="px-6 py-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-slate-200 dark:hover:bg-white/10 transition-colors cursor-pointer"
                   >
                     Send Another Message
                   </button>

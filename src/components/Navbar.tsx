@@ -162,7 +162,7 @@ export const Navbar: React.FC = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-30 bg-[#0A0A0A]/95 backdrop-blur-lg flex flex-col justify-center items-center p-6 md:hidden"
+            className="fixed inset-0 z-30 bg-white/95 dark:bg-[#0A0A0A]/95 backdrop-blur-lg flex flex-col justify-center items-center p-6 md:hidden"
             initial={{ opacity: 0, y: '-100%' }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: '-100%' }}
@@ -184,7 +184,7 @@ export const Navbar: React.FC = () => {
                       handleLinkClick(link.href);
                     }}
                     className={`text-2xl font-bold tracking-wide transition-colors ${
-                      isActive ? 'text-brand-cyan' : 'text-gray-400 hover:text-white'
+                      isActive ? 'text-brand-cyan' : 'text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white'
                     }`}
                   >
                     {link.name}
