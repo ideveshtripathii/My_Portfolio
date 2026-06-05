@@ -41,7 +41,7 @@ export const Footer: React.FC = () => {
             <LinkedinIcon size={16} />
           </a>
           <a
-            href="https://github.com/idevesh-tripathi"
+            href="https://github.com/ideveshtripathii"
             target="_blank"
             rel="noopener noreferrer"
             className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-brand-cyan dark:hover:text-brand-cyan transition-all shadow-md cursor-pointer"

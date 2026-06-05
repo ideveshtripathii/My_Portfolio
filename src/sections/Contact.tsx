@@ -36,8 +36,8 @@ const contactInfoData: ContactInfo[] = [
   },
   {
     name: 'GitHub Repository',
-    value: 'idevesh-tripathi',
-    link: 'https://github.com/idevesh-tripathi',
+    value: 'ideveshtripathii',
+    link: 'https://github.com/ideveshtripathii',
     icon: <GithubIcon size={20} />,
     color: 'indigo',
   },

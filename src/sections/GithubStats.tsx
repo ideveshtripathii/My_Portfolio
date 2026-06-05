@@ -1,10 +1,23 @@
-import React, { useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { GitCommit, Flame, Trophy, Code2 } from 'lucide-react';
 import { ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
 
-// Seed static contribution grid data (53 weeks * 7 days = 371 squares)
-// Let's generate a list of squares with contribution levels (0 to 4)
+interface GitHubData {
+  contributionGrid: Array<{ date: string; level: number; commits: number }>;
+  longestStreak: number;
+  currentStreak: number;
+  totalCommits: number;
+  languageData: Array<{ name: string; value: number; color: string }>;
+  activityData: Array<{ name: string; commits: number }>;
+  publicRepos: number;
+  followers: number;
+  starsCount: number;
+  primaryEcosystem: string;
+  primaryLanguage: string;
+}
+
+// Seed static contribution grid data (53 weeks * 7 days = 371 squares) as fallback
 const generateGridData = () => {
   const data = [];
   const levels = [0, 0, 1, 1, 2, 2, 3, 3, 4]; // weights
@@ -25,32 +38,61 @@ const generateGridData = () => {
   return data;
 };
 
-// Language distribution data
-const languageData = [
-  { name: 'JavaScript', value: 35, color: '#F7DF1E' },
-  { name: 'TypeScript', value: 25, color: '#3178C6' },
-  { name: 'React (HTML/CSS)', value: 20, color: '#61DAFB' },
-  { name: 'Node / Express', value: 15, color: '#339933' },
-  { name: 'Databases', value: 5, color: '#47A248' },
-];
+// Initial fallback mock data in case API limits or errors occur
+const fallbackData: GitHubData = {
+  contributionGrid: generateGridData(),
+  longestStreak: 45,
+  currentStreak: 12,
+  totalCommits: 450,
+  languageData: [
+    { name: 'JavaScript', value: 35, color: '#F7DF1E' },
+    { name: 'TypeScript', value: 25, color: '#3178C6' },
+    { name: 'React (HTML/CSS)', value: 20, color: '#61DAFB' },
+    { name: 'Node / Express', value: 15, color: '#339933' },
+    { name: 'Databases', value: 5, color: '#47A248' },
+  ],
+  activityData: [
+    { name: 'Dec', commits: 145 },
+    { name: 'Jan', commits: 198 },
+    { name: 'Feb', commits: 210 },
+    { name: 'Mar', commits: 175 },
+    { name: 'Apr', commits: 245 },
+    { name: 'May', commits: 280 },
+  ],
+  publicRepos: 15,
+  followers: 30,
+  starsCount: 25,
+  primaryEcosystem: 'MERN + TS Stack',
+  primaryLanguage: 'JS / TS',
+};
 
-// Activity Graph data (last 6 months)
-const activityData = [
-  { name: 'Dec', commits: 145 },
-  { name: 'Jan', commits: 198 },
-  { name: 'Feb', commits: 210 },
-  { name: 'Mar', commits: 175 },
-  { name: 'Apr', commits: 245 },
-  { name: 'May', commits: 280 },
-];
+const getLanguageColor = (lang: string) => {
+  const colors: Record<string, string> = {
+    JavaScript: '#F7DF1E',
+    TypeScript: '#3178C6',
+    HTML: '#E34F26',
+    CSS: '#1572B6',
+    Python: '#3776AB',
+    Java: '#007396',
+    C: '#A8B9CC',
+    'C++': '#00599C',
+    Go: '#00ADD8',
+    Ruby: '#701516',
+    PHP: '#777BB4',
+    Swift: '#F05138',
+  };
+  if (colors[lang]) return colors[lang];
+  let hash = 0;
+  for (let i = 0; i < lang.length; i++) {
+    hash = lang.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const c = (hash & 0x00FFFFFF).toString(16).toUpperCase();
+  return '#' + '00000'.substring(0, 6 - c.length) + c;
+};
 
 export const GithubStats: React.FC = () => {
-  const contributionGrid = useMemo(() => generateGridData(), []);
-
-  // Compute total commits from grid
-  const computedTotalCommits = useMemo(() => {
-    return contributionGrid.reduce((sum, item) => sum + item.commits, 0);
-  }, [contributionGrid]);
+  const [githubData, setGithubData] = useState<GitHubData>(fallbackData);
+  const [, setIsLoading] = useState<boolean>(true);
 
   const getSquareColorClass = (level: number) => {
     if (level === 0) return 'bg-gray-200 dark:bg-[#1F2937]/30';
@@ -59,6 +101,200 @@ export const GithubStats: React.FC = () => {
     if (level === 3) return 'bg-brand-purple/75 text-brand-purple';
     return 'bg-brand-cyan text-brand-cyan glow-cyan';
   };
+
+  useEffect(() => {
+    const CACHE_KEY = 'github_stats_cache_v2';
+    const CACHE_DURATION = 2 * 60 * 60 * 1000; // 2 hours cache
+
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached);
+        if (Date.now() - parsed.timestamp < CACHE_DURATION) {
+          setGithubData(parsed.data);
+          setIsLoading(false);
+          // Silently refresh in background if cache is older than 15 minutes
+          if (Date.now() - parsed.timestamp > 15 * 60 * 1000) {
+            fetchFreshData();
+          }
+          return;
+        }
+      } catch (e) {
+        console.error('Error parsing cache', e);
+      }
+    }
+
+    fetchFreshData();
+
+    async function fetchFreshData() {
+      try {
+        // 1. Fetch contributions
+        const contribPromise = fetch('https://github-contributions-api.jogruber.de/v4/ideveshtripathii')
+          .then(res => {
+            if (!res.ok) throw new Error('Contrib failed');
+            return res.json();
+          });
+
+        // 2. Fetch repos
+        const reposPromise = fetch('https://api.github.com/users/ideveshtripathii/repos?per_page=100')
+          .then(res => {
+            if (!res.ok) throw new Error('Repos failed');
+            return res.json();
+          });
+
+        // 3. Fetch user profile
+        const userPromise = fetch('https://api.github.com/users/ideveshtripathii')
+          .then(res => {
+            if (!res.ok) throw new Error('User failed');
+            return res.json();
+          });
+
+        const [contribRes, reposRes, userRes] = await Promise.allSettled([
+          contribPromise,
+          reposPromise,
+          userPromise
+        ]);
+
+        const freshData: Partial<GitHubData> = {};
+
+        if (contribRes.status === 'fulfilled') {
+          const json = contribRes.value;
+          const sorted = [...json.contributions].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+          const last371 = sorted.slice(-371);
+          
+          freshData.contributionGrid = last371.map((item: any) => {
+            const d = new Date(item.date);
+            return {
+              date: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+              level: item.level,
+              commits: item.count,
+            };
+          });
+
+          freshData.totalCommits = last371.reduce((sum: number, item: any) => sum + item.count, 0);
+
+          // Streaks
+          let maxStr = 0;
+          let tempStr = 0;
+          sorted.forEach((item: any) => {
+            if (item.count > 0) {
+              tempStr++;
+              if (tempStr > maxStr) maxStr = tempStr;
+            } else {
+              tempStr = 0;
+            }
+          });
+          freshData.longestStreak = maxStr;
+
+          let curStr = 0;
+          let idx = sorted.length - 1;
+          if (idx >= 0) {
+            const lastDate = new Date(sorted[idx].date);
+            const today = new Date();
+            const diffDays = Math.floor((today.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
+            if (sorted[idx].count === 0 && diffDays <= 1 && idx > 0) {
+              idx--;
+            }
+            while (idx >= 0 && sorted[idx].count > 0) {
+              curStr++;
+              idx--;
+            }
+          }
+          freshData.currentStreak = curStr;
+
+          // Commit velocity last 6 months
+          const monthlyCommits: Record<string, number> = {};
+          const last6MonthLabels: string[] = [];
+          for (let i = 5; i >= 0; i--) {
+            const d = new Date();
+            d.setMonth(d.getMonth() - i);
+            const mName = d.toLocaleDateString('en-US', { month: 'short' });
+            monthlyCommits[mName] = 0;
+            last6MonthLabels.push(mName);
+          }
+
+          sorted.forEach((item: any) => {
+            const itemDate = new Date(item.date);
+            const mName = itemDate.toLocaleDateString('en-US', { month: 'short' });
+            if (mName in monthlyCommits) {
+              const diffMonths = (new Date().getFullYear() - itemDate.getFullYear()) * 12 + new Date().getMonth() - itemDate.getMonth();
+              if (diffMonths >= 0 && diffMonths < 6) {
+                monthlyCommits[mName] += item.count;
+              }
+            }
+          });
+
+          freshData.activityData = last6MonthLabels.map(name => ({
+            name,
+            commits: monthlyCommits[name]
+          }));
+        }
+
+        if (reposRes.status === 'fulfilled') {
+          const repos = reposRes.value;
+          const counts: Record<string, number> = {};
+          let totalCount = 0;
+          let stars = 0;
+
+          repos.forEach((repo: any) => {
+            stars += repo.stargazers_count;
+            if (repo.language) {
+              counts[repo.language] = (counts[repo.language] || 0) + 1;
+              totalCount++;
+            }
+          });
+
+          freshData.starsCount = stars;
+
+          if (totalCount > 0) {
+            const languages = Object.entries(counts)
+              .map(([name, value]) => ({
+                name,
+                value: Math.round((value / totalCount) * 100),
+                color: getLanguageColor(name)
+              }))
+              .sort((a, b) => b.value - a.value);
+
+            freshData.languageData = languages.slice(0, 5);
+
+            const primary = languages[0]?.name || 'JS/TS';
+            const secondary = languages[1]?.name || '';
+            freshData.primaryLanguage = secondary ? `${primary} / ${secondary}` : primary;
+            freshData.primaryEcosystem = secondary ? `${primary} + ${secondary} Stack` : `${primary} Stack`;
+          }
+        }
+
+        if (userRes.status === 'fulfilled') {
+          const user = userRes.value;
+          freshData.followers = user.followers;
+          freshData.publicRepos = user.public_repos;
+        }
+
+        setGithubData(prev => {
+          const combined = {
+            ...(prev || fallbackData),
+            ...freshData
+          } as GitHubData;
+
+          localStorage.setItem(CACHE_KEY, JSON.stringify({
+            timestamp: Date.now(),
+            data: combined
+          }));
+
+          return combined;
+        });
+        setIsLoading(false);
+      } catch (err) {
+        console.error('Error fetching github data', err);
+        setIsLoading(false);
+      }
+    }
+  }, []);
+
+  const contributionGrid = githubData.contributionGrid;
+  const computedTotalCommits = githubData.totalCommits;
+  const languageData = githubData.languageData;
+  const activityData = githubData.activityData;
 
   return (
     <section id="github" className="py-24 relative overflow-hidden">
@@ -139,9 +375,9 @@ export const GithubStats: React.FC = () => {
               <div>
                 <span className="text-[10px] text-gray-500 font-mono tracking-widest uppercase block">Developer Streak</span>
                 <h4 className="text-xl font-extrabold text-slate-900 dark:text-white mt-1">
-                  45 Days Continuous
+                  {githubData.longestStreak} Days Continuous
                 </h4>
-                <p className="text-xs text-gray-500 font-mono mt-0.5">Current: 12 days streak</p>
+                <p className="text-xs text-gray-500 font-mono mt-0.5">Current: {githubData.currentStreak} days streak</p>
               </div>
             </div>
 
@@ -153,23 +389,25 @@ export const GithubStats: React.FC = () => {
               <div>
                 <span className="text-[10px] text-gray-500 font-mono tracking-widest uppercase block">Top Ecosystem</span>
                 <h4 className="text-xl font-extrabold text-slate-900 dark:text-white mt-1">
-                  MERN + TS Stack
+                  {githubData.primaryEcosystem}
                 </h4>
-                <p className="text-xs text-gray-500 font-mono mt-0.5">Primary language: JS / TS</p>
+                <p className="text-xs text-gray-500 font-mono mt-0.5">Primary: {githubData.primaryLanguage}</p>
               </div>
             </div>
 
-            {/* Global Standing */}
+            {/* GitHub Info Card */}
             <div className="p-6 rounded-3xl bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 flex items-center gap-4 text-left shadow-xl hover:border-brand-indigo/20 transition-colors">
               <div className="w-12 h-12 rounded-2xl bg-brand-indigo/10 border border-brand-indigo/20 flex items-center justify-center text-brand-indigo shrink-0">
                 <Trophy size={20} />
               </div>
               <div>
-                <span className="text-[10px] text-gray-500 font-mono tracking-widest uppercase block">Open Source Status</span>
+                <span className="text-[10px] text-gray-500 font-mono tracking-widest uppercase block">GitHub Profile</span>
                 <h4 className="text-xl font-extrabold text-slate-900 dark:text-white mt-1">
-                  Active Contributor
+                  {githubData.publicRepos} Public Repos
                 </h4>
-                <p className="text-xs text-gray-500 font-mono mt-0.5">150+ Pull Requests Merged</p>
+                <p className="text-xs text-gray-500 font-mono mt-0.5">
+                  {githubData.starsCount} Stars • {githubData.followers} Followers
+                </p>
               </div>
             </div>
 
