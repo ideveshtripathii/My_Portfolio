@@ -126,7 +126,7 @@ export const Hero: React.FC = () => {
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.8, type: 'spring', bounce: 0.25 }}
-            className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 flex items-center justify-center"
+            className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 flex items-center justify-center"
           >
             {/* Glowing Photo frame */}
             <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-brand-indigo via-brand-purple to-brand-cyan p-[3px] glow-indigo flex items-center justify-center animate-bounce-slow">

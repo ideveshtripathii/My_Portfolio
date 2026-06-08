@@ -155,7 +155,7 @@ export const Projects: React.FC = () => {
               >
 
                 {/* Visual Area (Mockup Image) - Left/Right alternates on desktop */}
-                <div className={`lg:col-span-6 w-full relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10 group aspect-[16/9] bg-slate-100 dark:bg-neutral-950 p-2 flex items-center justify-center ${index % 2 === 1 ? 'lg:order-last' : ''
+                <div className={`lg:col-span-7 w-full relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10 group aspect-[16/9] bg-slate-100 dark:bg-neutral-950 p-2 flex items-center justify-center ${index % 2 === 1 ? 'lg:order-last' : ''
                   }`}>
 
                   {/* Interactive zoom image */}
@@ -168,7 +168,7 @@ export const Projects: React.FC = () => {
                 </div>
 
                 {/* Information Area - Left/Right alternates */}
-                <div className="lg:col-span-6 flex flex-col items-start text-left">
+                <div className="lg:col-span-5 flex flex-col items-start text-left">
 
                   {/* Category icon / Subtitle */}
                   <div className="flex items-center gap-2 mb-3">
