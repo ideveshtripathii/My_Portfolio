@@ -23,14 +23,14 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       root.classList.remove('light');
       root.classList.add('dark');
       root.style.colorScheme = 'dark';
-      document.body.style.backgroundColor = '#0A0A0A';
-      document.body.style.color = '#F3F4F6';
+      document.body.style.backgroundColor = '#090A0F';
+      document.body.style.color = '#F1F5F9';
     } else {
       root.classList.remove('dark');
       root.classList.add('light');
       root.style.colorScheme = 'light';
-      document.body.style.backgroundColor = '#FFFFFF';
-      document.body.style.color = '#1F2937';
+      document.body.style.backgroundColor = '#F8FAFC';
+      document.body.style.color = '#0F172A';
     }
     localStorage.setItem('theme', theme);
   }, [theme]);

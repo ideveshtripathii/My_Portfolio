@@ -103,7 +103,7 @@ export const Contact: React.FC = () => {
         confetti({
           particleCount: 150,
           spread: 80,
-          colors: ['#06B6D4', '#8B5CF6', '#6366F1'],
+          colors: ['#38BDF8', '#8A94E5', '#5E6AD2'],
           origin: { y: 0.6 },
         });
         setFormData({ name: '', email: '', message: '' });
@@ -138,7 +138,7 @@ export const Contact: React.FC = () => {
         confetti({
           particleCount: 150,
           spread: 80,
-          colors: ['#06B6D4', '#8B5CF6', '#6366F1'],
+          colors: ['#38BDF8', '#8A94E5', '#5E6AD2'],
           origin: { y: 0.6 },
         });
         setFormData({ name: '', email: '', message: '' });

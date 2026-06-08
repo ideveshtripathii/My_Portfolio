@@ -58,7 +58,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
     <AnimatePresence>
       {!isDone && (
         <motion.div
-          className="fixed inset-0 bg-[#0A0A0A] z-[99999] flex flex-col items-center justify-center font-sans p-6"
+          className="fixed inset-0 bg-[#090A0F] z-[99999] flex flex-col items-center justify-center font-sans p-6"
           initial={{ opacity: 1 }}
           exit={{ 
             y: '-100%',
@@ -94,7 +94,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
                   cx="64"
                   cy="64"
                   r="58"
-                  className="stroke-[#1F2937]"
+                  className="stroke-slate-800"
                   strokeWidth="3"
                   fill="transparent"
                 />
@@ -103,7 +103,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
                   cx="64"
                   cy="64"
                   r="58"
-                  className="stroke-brand-cyan"
+                  className="stroke-brand-indigo"
                   strokeWidth="4"
                   fill="transparent"
                   strokeDasharray={2 * Math.PI * 58}
@@ -134,7 +134,7 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
             </div>
 
             {/* Horizontal progress bar */}
-            <div className="w-full bg-[#1F2937] h-1 rounded-full overflow-hidden">
+            <div className="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-gradient-to-r from-brand-indigo via-brand-purple to-brand-cyan"
                 style={{ width: `${progress}%` }}

@@ -49,10 +49,10 @@ const achievementsData: Achievement[] = [
 
 export const Achievements: React.FC = () => {
   const triggerConfetti = (color: string) => {
-    let colors = ['#6366F1', '#8B5CF6', '#06B6D4'];
-    if (color === 'indigo') colors = ['#6366F1', '#3F51B5'];
-    if (color === 'purple') colors = ['#8B5CF6', '#E040FB'];
-    if (color === 'cyan') colors = ['#06B6D4', '#00E5FF'];
+    let colors = ['#5E6AD2', '#8A94E5', '#38BDF8'];
+    if (color === 'indigo') colors = ['#5E6AD2', '#4F46E5'];
+    if (color === 'purple') colors = ['#8A94E5', '#A5B4FC'];
+    if (color === 'cyan') colors = ['#38BDF8', '#0EA5E9'];
 
     confetti({
       particleCount: 120,

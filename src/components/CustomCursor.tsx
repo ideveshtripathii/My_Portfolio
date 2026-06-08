@@ -76,8 +76,8 @@ export const CustomCursor: React.FC = () => {
         }}
         animate={{
           scale: isHovered ? 1.8 : 1,
-          borderColor: isHovered ? '#06B6D4' : '#6366F1',
-          backgroundColor: isHovered ? 'rgba(6, 182, 212, 0.1)' : 'rgba(99, 102, 241, 0)',
+          borderColor: isHovered ? '#38BDF8' : '#5E6AD2',
+          backgroundColor: isHovered ? 'rgba(56, 189, 248, 0.1)' : 'rgba(94, 106, 210, 0)',
         }}
         transition={{ type: 'tween', ease: 'backOut', duration: 0.2 }}
       />
@@ -92,7 +92,7 @@ export const CustomCursor: React.FC = () => {
         }}
         animate={{
           scale: isHovered ? 0.5 : 1,
-          backgroundColor: isHovered ? '#8B5CF6' : '#06B6D4',
+          backgroundColor: isHovered ? '#8A94E5' : '#38BDF8',
         }}
       />
     </>

@@ -36,8 +36,8 @@ export const AnimatedBackground: React.FC = () => {
         this.vy = (Math.random() - 0.5) * 0.4;
         this.radius = Math.random() * 2 + 1;
         this.color = theme === 'dark' 
-          ? `rgba(${Math.random() > 0.5 ? '99, 102, 241' : '6, 182, 212'}, ${Math.random() * 0.3 + 0.1})`
-          : `rgba(${Math.random() > 0.5 ? '79, 70, 229' : '139, 92, 246'}, ${Math.random() * 0.15 + 0.05})`;
+          ? `rgba(${Math.random() > 0.5 ? '94, 106, 210' : '56, 189, 248'}, ${Math.random() * 0.15 + 0.05})`
+          : `rgba(${Math.random() > 0.5 ? '15, 23, 42' : '94, 106, 210'}, ${Math.random() * 0.08 + 0.02})`;
       }
 
       update() {
@@ -95,8 +95,8 @@ export const AnimatedBackground: React.FC = () => {
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.strokeStyle = theme === 'dark' 
-              ? `rgba(99, 102, 241, ${alpha})`
-              : `rgba(79, 70, 229, ${alpha})`;
+              ? `rgba(94, 106, 210, ${alpha * 0.7})`
+              : `rgba(15, 23, 42, ${alpha * 0.6})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
@@ -110,26 +110,26 @@ export const AnimatedBackground: React.FC = () => {
       // Draw background ambient blobs
       if (theme === 'dark') {
         const grad1 = ctx.createRadialGradient(width * 0.2, height * 0.2, 0, width * 0.2, height * 0.2, width * 0.4);
-        grad1.addColorStop(0, 'rgba(99, 102, 241, 0.08)');
-        grad1.addColorStop(1, 'rgba(10, 10, 10, 0)');
+        grad1.addColorStop(0, 'rgba(94, 106, 210, 0.05)');
+        grad1.addColorStop(1, 'rgba(9, 10, 15, 0)');
         ctx.fillStyle = grad1;
         ctx.fillRect(0, 0, width, height);
 
         const grad2 = ctx.createRadialGradient(width * 0.8, height * 0.8, 0, width * 0.8, height * 0.8, width * 0.4);
-        grad2.addColorStop(0, 'rgba(6, 182, 212, 0.05)');
-        grad2.addColorStop(1, 'rgba(10, 10, 10, 0)');
+        grad2.addColorStop(0, 'rgba(56, 189, 248, 0.04)');
+        grad2.addColorStop(1, 'rgba(9, 10, 15, 0)');
         ctx.fillStyle = grad2;
         ctx.fillRect(0, 0, width, height);
       } else {
         const grad1 = ctx.createRadialGradient(width * 0.1, height * 0.1, 0, width * 0.1, height * 0.1, width * 0.3);
-        grad1.addColorStop(0, 'rgba(79, 70, 229, 0.04)');
-        grad1.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        grad1.addColorStop(0, 'rgba(94, 106, 210, 0.025)');
+        grad1.addColorStop(1, 'rgba(248, 250, 252, 0)');
         ctx.fillStyle = grad1;
         ctx.fillRect(0, 0, width, height);
 
         const grad2 = ctx.createRadialGradient(width * 0.9, height * 0.9, 0, width * 0.9, height * 0.9, width * 0.3);
-        grad2.addColorStop(0, 'rgba(139, 92, 246, 0.04)');
-        grad2.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        grad2.addColorStop(0, 'rgba(15, 23, 42, 0.02)');
+        grad2.addColorStop(1, 'rgba(248, 250, 252, 0)');
         ctx.fillStyle = grad2;
         ctx.fillRect(0, 0, width, height);
       }

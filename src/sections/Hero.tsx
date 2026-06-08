@@ -130,7 +130,7 @@ export const Hero: React.FC = () => {
           >
             {/* Glowing Photo frame */}
             <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-brand-indigo via-brand-purple to-brand-cyan p-[3px] glow-indigo flex items-center justify-center animate-bounce-slow">
-              <div className="w-full h-full rounded-full bg-slate-100 dark:bg-[#0A0A0A] overflow-hidden border-[4px] border-slate-200 dark:border-[#0A0A0A] flex items-center justify-center">
+              <div className="w-full h-full rounded-full bg-slate-100 dark:bg-[#090A0F] overflow-hidden border-[4px] border-slate-200 dark:border-[#090A0F] flex items-center justify-center">
                 <img
                   src={profileImg}
                   alt="Devesh Tripathi"
