@@ -297,8 +297,8 @@ export const GithubStats: React.FC = () => {
   const activityData = githubData.activityData;
 
   return (
-    <section id="github" className="py-24 relative overflow-hidden">
-      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] rounded-full bg-brand-cyan/5 blur-[120px] pointer-events-none" />
+    <section id="github" className="py-28 md:py-36 relative overflow-hidden">
+      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] rounded-full bg-brand-cyan/2 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         

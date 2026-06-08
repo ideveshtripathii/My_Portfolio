@@ -40,8 +40,8 @@ const articlesData: Article[] = [
 
 export const Writing: React.FC = () => {
   return (
-    <section id="writing" className="py-24 relative overflow-hidden">
-      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full bg-brand-purple/5 blur-[120px] pointer-events-none" />
+    <section id="writing" className="py-28 md:py-36 relative overflow-hidden">
+      <div className="absolute top-1/2 right-0 w-[400px] h-[400px] rounded-full bg-brand-purple/2 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         

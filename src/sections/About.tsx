@@ -22,10 +22,10 @@ export const About: React.FC = () => {
   };
 
   return (
-    <section id="about" className="py-24 relative overflow-hidden">
-      {/* Glow Blur decoration */}
-      <div className="absolute right-0 top-1/3 w-[300px] h-[300px] rounded-full bg-brand-cyan/5 blur-[100px] pointer-events-none" />
-      <div className="absolute left-0 bottom-1/4 w-[350px] h-[350px] rounded-full bg-brand-purple/5 blur-[120px] pointer-events-none" />
+    <section id="about" className="py-28 md:py-36 relative overflow-hidden">
+      {/* Ambient background glows */}
+      <div className="absolute right-0 top-1/3 w-[300px] h-[300px] rounded-full bg-brand-cyan/2 blur-[100px] pointer-events-none" />
+      <div className="absolute left-0 bottom-1/4 w-[350px] h-[350px] rounded-full bg-brand-purple/3 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 

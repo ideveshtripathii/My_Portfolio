@@ -38,11 +38,11 @@ export const Hero: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-grid-pattern"
+      className="relative min-h-screen flex items-center justify-center pt-32 pb-24 overflow-hidden bg-grid-pattern"
     >
       {/* Background gradients */}
-      <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-brand-indigo/10 blur-[100px] pointer-events-none animate-pulse-slow" />
-      <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full bg-brand-purple/10 blur-[100px] pointer-events-none animate-pulse-slow" style={{ animationDelay: '3s' }} />
+      <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-brand-indigo/4 blur-[100px] pointer-events-none animate-pulse-slow" />
+      <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full bg-brand-purple/4 blur-[100px] pointer-events-none animate-pulse-slow" style={{ animationDelay: '3s' }} />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
         

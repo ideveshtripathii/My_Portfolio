@@ -8,19 +8,19 @@
   --font-sans: 'Outfit', 'Plus Jakarta Sans', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Obsidian Steel & Slate Palette (Option A) */
-  --color-brand-indigo: #5E6AD2;
-  --color-brand-purple: #8A94E5;
-  --color-brand-cyan: #38BDF8;
+  /* Obsidian Steel & Slate Palette (Sparer Blue Refinement) */
+  --color-brand-indigo: #F1F5F9;
+  --color-brand-purple: #94A3B8;
+  --color-brand-cyan: #5E6AD2;
   --color-brand-primary-light: #0F172A;
 
   --color-dark-bg: #090A0F;
   --color-dark-card: #11121A;
-  --color-dark-border: rgba(255, 255, 255, 0.05);
+  --color-dark-border: rgba(255, 255, 255, 0.095);
 
   --color-light-bg: #F8FAFC;
   --color-light-card: #FFFFFF;
-  --color-light-border: rgba(15, 23, 42, 0.06);
+  --color-light-border: rgba(15, 23, 42, 0.12);
 
   /* Override tailwind default colors for automatic theme propagation */
   --color-neutral-900: #11121A;
@@ -85,21 +85,21 @@ body {
   background: rgba(9, 10, 15, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.095);
 }
 
 .light .glass {
   background: rgba(248, 250, 252, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(15, 23, 42, 0.12);
 }
 
 .glass-premium {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.005) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.095);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 }
 
@@ -107,23 +107,25 @@ body {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(248, 250, 252, 0.6) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(15, 23, 42, 0.05);
+  border: 1px solid rgba(15, 23, 42, 0.12);
   box-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.03);
 }
 
-/* Subtle grid overlay inspired by Vercel/Linear */
+/* Subtle grid overlay inspired by Vercel/Linear blueprint style */
 .bg-grid-pattern {
   background-size: 32px 32px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
 .light .bg-grid-pattern {
   background-size: 32px 32px;
   background-image: 
-    linear-gradient(to right, rgba(15, 23, 42, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.02) 1px, transparent 1px);
+    linear-gradient(to right, rgba(15, 23, 42, 0.015) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.015) 1px, transparent 1px),
+    radial-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px);
 }
 
 /* Scrollbar customization */
@@ -162,15 +164,15 @@ body {
   background: rgba(15, 23, 42, 0.25);
 }
 
-/* Neon glow helper classes */
+/* Neon glow helper classes - reduced by 40% in radius and strength */
 .glow-indigo {
-  box-shadow: 0 0 30px -10px rgba(94, 106, 210, 0.25);
+  box-shadow: 0 0 20px -8px rgba(241, 245, 249, 0.12);
 }
 .glow-purple {
-  box-shadow: 0 0 30px -10px rgba(138, 148, 229, 0.25);
+  box-shadow: 0 0 20px -8px rgba(148, 163, 184, 0.12);
 }
 .glow-cyan {
-  box-shadow: 0 0 30px -10px rgba(56, 189, 248, 0.25);
+  box-shadow: 0 0 20px -8px rgba(94, 106, 210, 0.15);
 }
 
 /* Hide scrollbar utility */

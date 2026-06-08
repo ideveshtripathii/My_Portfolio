@@ -91,10 +91,10 @@ export const Projects: React.FC = () => {
   );
 
   return (
-    <section id="projects" className="py-24 relative overflow-hidden">
+    <section id="projects" className="py-28 md:py-36 relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute right-0 bottom-1/4 w-[400px] h-[400px] rounded-full bg-brand-cyan/5 blur-[120px] pointer-events-none" />
-      <div className="absolute left-0 top-1/4 w-[300px] h-[300px] rounded-full bg-brand-indigo/5 blur-[100px] pointer-events-none" />
+      <div className="absolute right-0 bottom-1/4 w-[400px] h-[400px] rounded-full bg-brand-cyan/2 blur-[120px] pointer-events-none" />
+      <div className="absolute left-0 top-1/4 w-[300px] h-[300px] rounded-full bg-brand-indigo/2 blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
