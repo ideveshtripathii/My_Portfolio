@@ -9,9 +9,9 @@
   --font-mono: 'JetBrains Mono', monospace;
 
   /* Obsidian Steel & Slate Palette (Sparer Blue Refinement) */
-  --color-brand-indigo: #F1F5F9;
-  --color-brand-purple: #94A3B8;
-  --color-brand-cyan: #5E6AD2;
+  --color-brand-indigo: var(--brand-indigo);
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-cyan: var(--brand-cyan);
   --color-brand-primary-light: #0F172A;
 
   --color-dark-bg: #090A0F;
@@ -54,6 +54,15 @@
 :root {
   color-scheme: dark light;
   scroll-behavior: smooth;
+  --brand-indigo: #F1F5F9;
+  --brand-purple: #94A3B8;
+  --brand-cyan: #5E6AD2;
+}
+
+.light {
+  --brand-indigo: #0F172A;
+  --brand-purple: #475569;
+  --brand-cyan: #2563EB;
 }
 
 body {
@@ -187,4 +196,17 @@ body {
 /* Journey timeline line gradient helper */
 .journey-line {
   background: linear-gradient(to bottom, var(--color-brand-indigo), var(--color-brand-purple), var(--color-brand-cyan));
+}
+
+/* Global card contrast overrides for light & dark themes */
+.bg-white\/90 {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(15, 23, 42, 0.16) !important; /* Stronger border in light mode */
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.08) !important; /* Subtle shadow to float card on F8FAFC */
+}
+
+.dark .dark\:bg-neutral-900\/90 {
+  background-color: rgba(17, 18, 26, 0.9) !important; /* Option A card background */
+  border-color: rgba(255, 255, 255, 0.14) !important; /* Option A dark border */
+  box-shadow: none !important;
 }
