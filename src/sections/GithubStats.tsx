@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { GitCommit, Flame, Trophy, Code2 } from 'lucide-react';
-import { ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
+import { GitCommit } from 'lucide-react';
 
 interface GitHubData {
   contributionGrid: Array<{ date: string; level: number; commits: number }>;
@@ -293,8 +292,6 @@ export const GithubStats: React.FC = () => {
 
   const contributionGrid = githubData.contributionGrid;
   const computedTotalCommits = githubData.totalCommits;
-  const languageData = githubData.languageData;
-  const activityData = githubData.activityData;
 
   return (
     <section id="github" className="py-28 md:py-36 relative overflow-hidden">
@@ -323,10 +320,10 @@ export const GithubStats: React.FC = () => {
         </div>
 
         {/* Dashboard Grid Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 max-w-6xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           
           {/* Contribution Grid panel - Span 12 */}
-          <div className="lg:col-span-12 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 p-6 md:p-8 rounded-3xl text-left shadow-2xl overflow-hidden">
+          <div className="bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 p-6 md:p-8 rounded-3xl text-left shadow-2xl overflow-hidden">
             <div className="flex items-center justify-between mb-6 border-b border-black/5 dark:border-white/5 pb-4">
               <div>
                 <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
@@ -349,7 +346,7 @@ export const GithubStats: React.FC = () => {
             </div>
 
             {/* Scrollable grid box */}
-            <div className="overflow-x-auto no-scrollbar pb-2">
+            <div className="overflow-x-auto no-scrollbar pb-6">
               <div className="grid grid-flow-col grid-rows-7 gap-1 md:gap-[5px] w-max select-none">
                 {contributionGrid.map((item, idx) => (
                   <div
@@ -362,138 +359,28 @@ export const GithubStats: React.FC = () => {
                 ))}
               </div>
             </div>
-          </div>
 
-          {/* Quick Metrics Panel - Span 4 */}
-          <div className="lg:col-span-4 flex flex-col gap-6">
-            
-            {/* Streak Card */}
-            <div className="p-6 rounded-3xl bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 flex items-center gap-4 text-left shadow-xl hover:border-brand-purple/20 transition-colors">
-              <div className="w-12 h-12 rounded-2xl bg-brand-purple/10 border border-brand-purple/20 flex items-center justify-center text-brand-purple shrink-0 animate-pulse">
-                <Flame size={22} />
+            {/* Simple stats bar */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t border-black/5 dark:border-white/5">
+              <div className="text-center sm:text-left">
+                <span className="text-[10px] text-gray-500 dark:text-gray-400 font-mono tracking-widest uppercase">Public Repos</span>
+                <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">{githubData.publicRepos}</p>
               </div>
-              <div>
-                <span className="text-[10px] text-gray-500 font-mono tracking-widest uppercase block">Developer Streak</span>
-                <h4 className="text-xl font-extrabold text-slate-900 dark:text-white mt-1">
-                  {githubData.longestStreak} Days Continuous
-                </h4>
-                <p className="text-xs text-gray-500 font-mono mt-0.5">Current: {githubData.currentStreak} days streak</p>
+              <div className="text-center sm:text-left">
+                <span className="text-[10px] text-gray-500 dark:text-gray-400 font-mono tracking-widest uppercase">Total Stars</span>
+                <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">{githubData.starsCount}</p>
               </div>
-            </div>
-
-            {/* Top Language Card */}
-            <div className="p-6 rounded-3xl bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 flex items-center gap-4 text-left shadow-xl hover:border-brand-cyan/20 transition-colors">
-              <div className="w-12 h-12 rounded-2xl bg-brand-cyan/10 border border-brand-cyan/20 flex items-center justify-center text-brand-cyan shrink-0">
-                <Code2 size={22} />
+              <div className="text-center sm:text-left">
+                <span className="text-[10px] text-gray-500 dark:text-gray-400 font-mono tracking-widest uppercase">Followers</span>
+                <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">{githubData.followers}</p>
               </div>
-              <div>
-                <span className="text-[10px] text-gray-500 font-mono tracking-widest uppercase block">Top Ecosystem</span>
-                <h4 className="text-xl font-extrabold text-slate-900 dark:text-white mt-1">
-                  {githubData.primaryEcosystem}
-                </h4>
-                <p className="text-xs text-gray-500 font-mono mt-0.5">Primary: {githubData.primaryLanguage}</p>
-              </div>
-            </div>
-
-            {/* GitHub Info Card */}
-            <div className="p-6 rounded-3xl bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 flex items-center gap-4 text-left shadow-xl hover:border-brand-indigo/20 transition-colors">
-              <div className="w-12 h-12 rounded-2xl bg-brand-indigo/10 border border-brand-indigo/20 flex items-center justify-center text-brand-indigo shrink-0">
-                <Trophy size={20} />
-              </div>
-              <div>
-                <span className="text-[10px] text-gray-500 font-mono tracking-widest uppercase block">GitHub Profile</span>
-                <h4 className="text-xl font-extrabold text-slate-900 dark:text-white mt-1">
-                  {githubData.publicRepos} Public Repos
-                </h4>
-                <p className="text-xs text-gray-500 font-mono mt-0.5">
-                  {githubData.starsCount} Stars • {githubData.followers} Followers
-                </p>
+              <div className="text-center sm:text-left">
+                <span className="text-[10px] text-gray-500 dark:text-gray-400 font-mono tracking-widest uppercase">Total Commits</span>
+                <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">{computedTotalCommits}</p>
               </div>
             </div>
 
           </div>
-
-          {/* Recharts Language Donut Chart - Span 4 */}
-          <div className="lg:col-span-4 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 p-6 rounded-3xl text-left shadow-2xl flex flex-col justify-between h-[300px]">
-            <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-2 font-mono">
-              Language Share %
-            </h4>
-            <div className="h-[160px] relative w-full">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
-                  <Pie
-                    data={languageData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={50}
-                    outerRadius={70}
-                    paddingAngle={3}
-                    dataKey="value"
-                  >
-                    {languageData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
-                    ))}
-                  </Pie>
-                  <Tooltip
-                    contentStyle={{
-                      background: 'rgba(10,10,10,0.85)',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      borderRadius: '8px',
-                      color: '#FFF',
-                      fontSize: '11px',
-                    }}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-            </div>
-            
-            {/* Legend Labels */}
-            <div className="flex flex-wrap gap-x-3 gap-y-1.5 text-[9px] font-mono text-gray-400">
-              {languageData.map((entry) => (
-                <div key={entry.name} className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: entry.color }} />
-                  <span>{entry.name} ({entry.value}%)</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Recharts Commit Activity Line Graph - Span 4 */}
-          <div className="lg:col-span-4 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 p-6 rounded-3xl text-left shadow-2xl flex flex-col justify-between h-[300px]">
-            <div>
-              <h4 className="text-sm font-bold text-slate-900 dark:text-white mb-1 font-mono">
-                Commit Velocity
-              </h4>
-              <p className="text-[10px] text-gray-500 font-mono">Monthly commit frequency</p>
-            </div>
-
-            <div className="h-[180px] w-full mt-4">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={activityData} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>
-                  <XAxis dataKey="name" stroke="#6B7280" fontSize={10} tickLine={false} axisLine={false} />
-                  <YAxis stroke="#6B7280" fontSize={10} tickLine={false} axisLine={false} />
-                  <Tooltip
-                    contentStyle={{
-                      background: 'rgba(10,10,10,0.85)',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      borderRadius: '8px',
-                      color: '#FFF',
-                      fontSize: '11px',
-                    }}
-                  />
-                  <Line
-                    type="monotone"
-                    dataKey="commits"
-                    stroke="#06B6D4"
-                    strokeWidth={2.5}
-                    dot={{ fill: '#06B6D4', strokeWidth: 1, r: 3 }}
-                    activeDot={{ r: 5, strokeWidth: 0 }}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-
         </div>
 
       </div>
