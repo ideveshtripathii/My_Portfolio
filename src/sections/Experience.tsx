@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Sparkles, Server, GraduationCap } from 'lucide-react';
+import { Calendar, Briefcase } from 'lucide-react';
 
 interface ExperienceItem {
   role: string;
   company: string;
   period: string;
-  type: 'academic' | 'training' | 'seeking';
+  type: 'professional';
   icon: React.ReactNode;
   description: string;
   points: string[];
@@ -14,41 +14,17 @@ interface ExperienceItem {
 
 const experienceData: ExperienceItem[] = [
   {
-    role: 'Full Stack & AI Engineer Opportunities',
-    company: 'Available for Relocation / Remote',
-    period: 'Present',
-    type: 'seeking',
-    icon: <Sparkles className="text-brand-cyan" size={18} />,
-    description: 'Currently seeking Full Stack Developer, Backend Developer, and AI Engineer opportunities. Actively refining my systems knowledge, testing new LLM integrations, and preparing to build high-performance software within a collaborative engineering team.',
+    role: 'Web Developer Intern',
+    company: 'Navigant Technologies',
+    period: 'Jun 2026 – Present',
+    type: 'professional',
+    icon: <Briefcase className="text-brand-cyan" size={18} />,
+    description: 'Contributing to full-stack web application development using React.js, Node.js, Express.js, MongoDB, and TypeScript. Assisting with backend APIs, database management, quality assurance testing, and team coordination.',
     points: [
-      'Available for full-time employment from May 2026 onwards',
-      'Target roles: Full Stack Developer (MERN), Backend Engineer, AI Engineer',
-      'Proficient in modern CI/CD, microservices patterns, Docker containerization, and AWS hosting',
-    ],
-  },
-  {
-    role: '100xDevs Cohort 3 Graduate',
-    company: 'Full Stack Web Development & DevOps Program',
-    period: 'Jul 2024 - Dec 2024',
-    type: 'training',
-    icon: <Server className="text-brand-purple" size={18} />,
-    description: 'Completed intensive 6-month developer accelerator covering advanced architectural patterns, real-time networking, caching layers, and production deployments.',
-    points: [
-      'Mastered asynchronous message streams using Socket.io and Pub/Sub architectures',
-      'Engineered cache-aside layers using Redis to resolve bottleneck queries',
-      'Configured secure payments via Stripe checkouts and automatic webhook processing',
-    ],
-  },
-  {
-    role: 'Master of Computer Applications (MCA)',
-    company: 'Babu Banarasi Das University, Lucknow',
-    period: 'Sep 2024 - May 2026',
-    type: 'academic',
-    icon: <GraduationCap className="text-brand-indigo" size={18} />,
-    description: 'Advanced study of software engineering principles, algorithms, cloud computing, database optimization, and machine learning models.',
-    points: [
-      'Maintained academic focus in system engineering and database indexing',
-      'Achieved a strong academic standing with an SGPA score of 8.0',
+      'Contributing to full-stack web application development using React.js, Node.js, Express.js, MongoDB, and TypeScript',
+      'Assisting in backend API development and database management',
+      'Participating in testing, debugging, and issue resolution to improve application quality',
+      'Collaborating with team members using Git and GitHub to deliver project requirements',
     ],
   },
 ];
@@ -99,20 +75,8 @@ export const Experience: React.FC = () => {
               >
                 
                 {/* Timeline node dot indicator */}
-                <div className={`absolute -left-[30px] md:-left-[43px] top-1.5 w-6 h-6 rounded-full flex items-center justify-center border z-10 shadow-md ${
-                  item.type === 'seeking'
-                    ? 'bg-brand-cyan/15 border-brand-cyan text-brand-cyan'
-                    : item.type === 'training'
-                    ? 'bg-brand-purple/15 border-brand-purple text-brand-purple'
-                    : 'bg-brand-indigo/15 border-brand-indigo text-brand-indigo'
-                }`}>
-                  <span className={`w-2 h-2 rounded-full ${
-                    item.type === 'seeking'
-                      ? 'bg-brand-cyan animate-pulse'
-                      : item.type === 'training'
-                      ? 'bg-brand-purple'
-                      : 'bg-brand-indigo'
-                  }`} />
+                <div className="absolute -left-[30px] md:-left-[43px] top-1.5 w-6 h-6 rounded-full flex items-center justify-center border border-brand-cyan z-10 shadow-md bg-brand-cyan/15 text-brand-cyan">
+                  <span className="w-2 h-2 rounded-full bg-brand-cyan animate-pulse" />
                 </div>
 
                 {/* Main Card Content */}
