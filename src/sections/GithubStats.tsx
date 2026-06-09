@@ -294,13 +294,13 @@ export const GithubStats: React.FC = () => {
   const computedTotalCommits = githubData.totalCommits;
 
   return (
-    <section id="github" className="py-28 md:py-36 relative overflow-hidden">
+    <section id="github" className="py-20 md:py-24 relative overflow-hidden">
       <div className="absolute top-1/2 left-0 w-[400px] h-[400px] rounded-full bg-brand-cyan/2 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
         {/* Heading */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -320,18 +320,18 @@ export const GithubStats: React.FC = () => {
         </div>
 
         {/* Dashboard Grid Layout */}
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           
           {/* Contribution Grid panel - Span 12 */}
-          <div className="bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 p-6 md:p-8 rounded-3xl text-left shadow-2xl overflow-hidden">
+          <div className="bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 p-5 md:p-6 rounded-3xl text-left shadow-2xl overflow-hidden">
             <div className="flex items-center justify-between mb-6 border-b border-black/5 dark:border-white/5 pb-4">
               <div>
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                  <GitCommit className="text-brand-cyan" size={20} />
+                <h3 className="text-base md:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <GitCommit className="text-brand-cyan" size={18} />
                   Contribution Calendar
                 </h3>
                 <p className="text-xs text-gray-500 mt-1 font-mono">
-                  {computedTotalCommits}+ commits in the past 371 days
+                  {computedTotalCommits} commits in the past 371 days
                 </p>
               </div>
               <div className="flex gap-2 text-[10px] text-gray-500 font-mono items-center">
@@ -347,11 +347,11 @@ export const GithubStats: React.FC = () => {
 
             {/* Scrollable grid box */}
             <div className="overflow-x-auto no-scrollbar pb-6">
-              <div className="grid grid-flow-col grid-rows-7 gap-1 md:gap-[5px] w-max select-none">
+              <div className="grid grid-flow-col grid-rows-7 gap-[3px] w-max select-none">
                 {contributionGrid.map((item, idx) => (
                   <div
                     key={idx}
-                    className={`w-[10px] h-[10px] md:w-[12px] md:h-[12px] rounded-sm transition-transform hover:scale-125 cursor-help ${getSquareColorClass(
+                    className={`w-[8px] h-[8px] md:w-[9px] md:h-[9px] rounded-[1.5px] transition-transform hover:scale-125 cursor-help ${getSquareColorClass(
                       item.level
                     )}`}
                     title={`${item.commits} commits on ${item.date}`}
@@ -361,7 +361,7 @@ export const GithubStats: React.FC = () => {
             </div>
 
             {/* Simple stats bar */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6 border-t border-black/5 dark:border-white/5">
+            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-black/5 dark:border-white/5">
               <div className="text-center sm:text-left">
                 <span className="text-[10px] text-gray-500 dark:text-gray-400 font-mono tracking-widest uppercase">Public Repos</span>
                 <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">{githubData.publicRepos}</p>
@@ -369,10 +369,6 @@ export const GithubStats: React.FC = () => {
               <div className="text-center sm:text-left">
                 <span className="text-[10px] text-gray-500 dark:text-gray-400 font-mono tracking-widest uppercase">Total Stars</span>
                 <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">{githubData.starsCount}</p>
-              </div>
-              <div className="text-center sm:text-left">
-                <span className="text-[10px] text-gray-500 dark:text-gray-400 font-mono tracking-widest uppercase">Followers</span>
-                <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">{githubData.followers}</p>
               </div>
               <div className="text-center sm:text-left">
                 <span className="text-[10px] text-gray-500 dark:text-gray-400 font-mono tracking-widest uppercase">Total Commits</span>
