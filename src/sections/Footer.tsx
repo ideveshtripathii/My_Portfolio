@@ -38,7 +38,7 @@ export const Footer: React.FC = () => {
             className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-brand-cyan dark:hover:text-brand-cyan transition-all shadow-md cursor-pointer"
             aria-label="Visit LinkedIn"
           >
-            <LinkedinIcon size={16} />
+            <LinkedinIcon size={14} />
           </a>
           <a
             href="https://github.com/ideveshtripathii"
@@ -47,7 +47,7 @@ export const Footer: React.FC = () => {
             className="w-9 h-9 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-brand-cyan dark:hover:text-brand-cyan transition-all shadow-md cursor-pointer"
             aria-label="Visit GitHub"
           >
-            <GithubIcon size={16} />
+            <GithubIcon size={14} />
           </a>
 
           {/* Quick scroll to top */}

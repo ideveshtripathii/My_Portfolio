@@ -1,9 +1,7 @@
-import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
 import { CustomCursor } from './components/CustomCursor';
 import { AnimatedBackground } from './components/AnimatedBackground';
-import { LoadingScreen } from './components/LoadingScreen';
 import { Navbar } from './components/Navbar';
 import { Hero } from './sections/Hero';
 import { About } from './sections/About';
@@ -11,7 +9,6 @@ import { Experience } from './sections/Experience';
 import { Projects } from './sections/Projects';
 import { TechStack } from './sections/TechStack';
 import { GithubStats } from './sections/GithubStats';
-import { Writing } from './sections/Writing';
 import { Contact } from './sections/Contact';
 import { Footer } from './sections/Footer';
 
@@ -35,7 +32,6 @@ function MainLayout() {
         <Projects />
         <TechStack />
         <GithubStats />
-        <Writing />
         <Contact />
       </main>
 
@@ -46,21 +42,15 @@ function MainLayout() {
 }
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
   return (
     <ThemeProvider>
-      {isLoading ? (
-        <LoadingScreen onComplete={() => setIsLoading(false)} />
-      ) : (
-        <Router>
-          <Routes>
-            <Route path="/" element={<MainLayout />} />
-            {/* Fallback routing to ensure all subroutes land gracefully */}
-            <Route path="*" element={<MainLayout />} />
-          </Routes>
-        </Router>
-      )}
+      <Router>
+        <Routes>
+          <Route path="/" element={<MainLayout />} />
+          {/* Fallback routing to ensure all subroutes land gracefully */}
+          <Route path="*" element={<MainLayout />} />
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 }

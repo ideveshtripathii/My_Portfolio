@@ -31,7 +31,7 @@ const experienceData: ExperienceItem[] = [
 
 export const Experience: React.FC = () => {
   return (
-    <section id="experience" className="py-28 md:py-36 relative bg-grid-pattern">
+    <section id="experience" className="py-16 md:py-20 relative bg-grid-pattern">
       <div className="absolute top-1/4 right-1/4 w-[350px] h-[350px] rounded-full bg-brand-purple/3 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">

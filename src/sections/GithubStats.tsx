@@ -1,306 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { GitCommit } from 'lucide-react';
-
-interface GitHubData {
-  contributionGrid: Array<{ date: string; level: number; commits: number }>;
-  longestStreak: number;
-  currentStreak: number;
-  totalCommits: number;
-  languageData: Array<{ name: string; value: number; color: string }>;
-  activityData: Array<{ name: string; commits: number }>;
-  publicRepos: number;
-  followers: number;
-  starsCount: number;
-  primaryEcosystem: string;
-  primaryLanguage: string;
-}
-
-// Seed static contribution grid data (53 weeks * 7 days = 371 squares) as fallback
-const generateGridData = () => {
-  const data = [];
-  const levels = [0, 0, 1, 1, 2, 2, 3, 3, 4]; // weights
-  const days = 371;
-  const baseDate = new Date();
-  baseDate.setDate(baseDate.getDate() - days);
-
-  for (let i = 0; i < days; i++) {
-    const currentDate = new Date(baseDate);
-    currentDate.setDate(baseDate.getDate() + i);
-    const level = levels[Math.floor(Math.random() * levels.length)];
-    data.push({
-      date: currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-      level,
-      commits: level === 0 ? 0 : level * 2 + Math.floor(Math.random() * 2),
-    });
-  }
-  return data;
-};
-
-// Initial fallback mock data in case API limits or errors occur
-const fallbackData: GitHubData = {
-  contributionGrid: generateGridData(),
-  longestStreak: 45,
-  currentStreak: 12,
-  totalCommits: 450,
-  languageData: [
-    { name: 'JavaScript', value: 35, color: '#F7DF1E' },
-    { name: 'TypeScript', value: 25, color: '#3178C6' },
-    { name: 'React (HTML/CSS)', value: 20, color: '#61DAFB' },
-    { name: 'Node / Express', value: 15, color: '#339933' },
-    { name: 'Databases', value: 5, color: '#47A248' },
-  ],
-  activityData: [
-    { name: 'Dec', commits: 145 },
-    { name: 'Jan', commits: 198 },
-    { name: 'Feb', commits: 210 },
-    { name: 'Mar', commits: 175 },
-    { name: 'Apr', commits: 245 },
-    { name: 'May', commits: 280 },
-  ],
-  publicRepos: 15,
-  followers: 30,
-  starsCount: 25,
-  primaryEcosystem: 'MERN + TS Stack',
-  primaryLanguage: 'JS / TS',
-};
-
-const getLanguageColor = (lang: string) => {
-  const colors: Record<string, string> = {
-    JavaScript: '#F7DF1E',
-    TypeScript: '#3178C6',
-    HTML: '#E34F26',
-    CSS: '#1572B6',
-    Python: '#3776AB',
-    Java: '#007396',
-    C: '#A8B9CC',
-    'C++': '#00599C',
-    Go: '#00ADD8',
-    Ruby: '#701516',
-    PHP: '#777BB4',
-    Swift: '#F05138',
-  };
-  if (colors[lang]) return colors[lang];
-  let hash = 0;
-  for (let i = 0; i < lang.length; i++) {
-    hash = lang.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  const c = (hash & 0x00FFFFFF).toString(16).toUpperCase();
-  return '#' + '00000'.substring(0, 6 - c.length) + c;
-};
 
 export const GithubStats: React.FC = () => {
-  const [githubData, setGithubData] = useState<GitHubData>(fallbackData);
-  const [, setIsLoading] = useState<boolean>(true);
-
-  const getSquareColorClass = (level: number) => {
-    if (level === 0) return 'bg-gray-200 dark:bg-[#1F2937]/30';
-    if (level === 1) return 'bg-brand-indigo/25 text-brand-indigo';
-    if (level === 2) return 'bg-brand-indigo/50 text-brand-indigo';
-    if (level === 3) return 'bg-brand-purple/75 text-brand-purple';
-    return 'bg-brand-cyan text-brand-cyan glow-cyan';
-  };
-
-  useEffect(() => {
-    const CACHE_KEY = 'github_stats_cache_v2';
-    const CACHE_DURATION = 2 * 60 * 60 * 1000; // 2 hours cache
-
-    const cached = localStorage.getItem(CACHE_KEY);
-    if (cached) {
-      try {
-        const parsed = JSON.parse(cached);
-        if (Date.now() - parsed.timestamp < CACHE_DURATION) {
-          setGithubData(parsed.data);
-          setIsLoading(false);
-          // Silently refresh in background if cache is older than 15 minutes
-          if (Date.now() - parsed.timestamp > 15 * 60 * 1000) {
-            fetchFreshData();
-          }
-          return;
-        }
-      } catch (e) {
-        console.error('Error parsing cache', e);
-      }
-    }
-
-    fetchFreshData();
-
-    async function fetchFreshData() {
-      try {
-        // 1. Fetch contributions
-        const contribPromise = fetch('https://github-contributions-api.jogruber.de/v4/ideveshtripathii')
-          .then(res => {
-            if (!res.ok) throw new Error('Contrib failed');
-            return res.json();
-          });
-
-        // 2. Fetch repos
-        const reposPromise = fetch('https://api.github.com/users/ideveshtripathii/repos?per_page=100')
-          .then(res => {
-            if (!res.ok) throw new Error('Repos failed');
-            return res.json();
-          });
-
-        // 3. Fetch user profile
-        const userPromise = fetch('https://api.github.com/users/ideveshtripathii')
-          .then(res => {
-            if (!res.ok) throw new Error('User failed');
-            return res.json();
-          });
-
-        const [contribRes, reposRes, userRes] = await Promise.allSettled([
-          contribPromise,
-          reposPromise,
-          userPromise
-        ]);
-
-        const freshData: Partial<GitHubData> = {};
-
-        if (contribRes.status === 'fulfilled') {
-          const json = contribRes.value;
-          const sorted = [...json.contributions].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-          const last371 = sorted.slice(-371);
-          
-          freshData.contributionGrid = last371.map((item: any) => {
-            const d = new Date(item.date);
-            return {
-              date: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-              level: item.level,
-              commits: item.count,
-            };
-          });
-
-          freshData.totalCommits = last371.reduce((sum: number, item: any) => sum + item.count, 0);
-
-          // Streaks
-          let maxStr = 0;
-          let tempStr = 0;
-          sorted.forEach((item: any) => {
-            if (item.count > 0) {
-              tempStr++;
-              if (tempStr > maxStr) maxStr = tempStr;
-            } else {
-              tempStr = 0;
-            }
-          });
-          freshData.longestStreak = maxStr;
-
-          let curStr = 0;
-          let idx = sorted.length - 1;
-          if (idx >= 0) {
-            const lastDate = new Date(sorted[idx].date);
-            const today = new Date();
-            const diffDays = Math.floor((today.getTime() - lastDate.getTime()) / (1000 * 60 * 60 * 24));
-            if (sorted[idx].count === 0 && diffDays <= 1 && idx > 0) {
-              idx--;
-            }
-            while (idx >= 0 && sorted[idx].count > 0) {
-              curStr++;
-              idx--;
-            }
-          }
-          freshData.currentStreak = curStr;
-
-          // Commit velocity last 6 months
-          const monthlyCommits: Record<string, number> = {};
-          const last6MonthLabels: string[] = [];
-          for (let i = 5; i >= 0; i--) {
-            const d = new Date();
-            d.setMonth(d.getMonth() - i);
-            const mName = d.toLocaleDateString('en-US', { month: 'short' });
-            monthlyCommits[mName] = 0;
-            last6MonthLabels.push(mName);
-          }
-
-          sorted.forEach((item: any) => {
-            const itemDate = new Date(item.date);
-            const mName = itemDate.toLocaleDateString('en-US', { month: 'short' });
-            if (mName in monthlyCommits) {
-              const diffMonths = (new Date().getFullYear() - itemDate.getFullYear()) * 12 + new Date().getMonth() - itemDate.getMonth();
-              if (diffMonths >= 0 && diffMonths < 6) {
-                monthlyCommits[mName] += item.count;
-              }
-            }
-          });
-
-          freshData.activityData = last6MonthLabels.map(name => ({
-            name,
-            commits: monthlyCommits[name]
-          }));
-        }
-
-        if (reposRes.status === 'fulfilled') {
-          const repos = reposRes.value;
-          const counts: Record<string, number> = {};
-          let totalCount = 0;
-          let stars = 0;
-
-          repos.forEach((repo: any) => {
-            stars += repo.stargazers_count;
-            if (repo.language) {
-              counts[repo.language] = (counts[repo.language] || 0) + 1;
-              totalCount++;
-            }
-          });
-
-          freshData.starsCount = stars;
-
-          if (totalCount > 0) {
-            const languages = Object.entries(counts)
-              .map(([name, value]) => ({
-                name,
-                value: Math.round((value / totalCount) * 100),
-                color: getLanguageColor(name)
-              }))
-              .sort((a, b) => b.value - a.value);
-
-            freshData.languageData = languages.slice(0, 5);
-
-            const primary = languages[0]?.name || 'JS/TS';
-            const secondary = languages[1]?.name || '';
-            freshData.primaryLanguage = secondary ? `${primary} / ${secondary}` : primary;
-            freshData.primaryEcosystem = secondary ? `${primary} + ${secondary} Stack` : `${primary} Stack`;
-          }
-        }
-
-        if (userRes.status === 'fulfilled') {
-          const user = userRes.value;
-          freshData.followers = user.followers;
-          freshData.publicRepos = user.public_repos;
-        }
-
-        setGithubData(prev => {
-          const combined = {
-            ...(prev || fallbackData),
-            ...freshData
-          } as GitHubData;
-
-          localStorage.setItem(CACHE_KEY, JSON.stringify({
-            timestamp: Date.now(),
-            data: combined
-          }));
-
-          return combined;
-        });
-        setIsLoading(false);
-      } catch (err) {
-        console.error('Error fetching github data', err);
-        setIsLoading(false);
-      }
-    }
-  }, []);
-
-  const contributionGrid = githubData.contributionGrid;
-  const computedTotalCommits = githubData.totalCommits;
-
   return (
-    <section id="github" className="py-20 md:py-24 relative overflow-hidden">
+    <section id="github" className="py-16 md:py-20 relative overflow-hidden">
+      {/* Decorative Glow */}
       <div className="absolute top-1/2 left-0 w-[400px] h-[400px] rounded-full bg-brand-cyan/2 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
         {/* Heading */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-6">
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -308,7 +18,7 @@ export const GithubStats: React.FC = () => {
             transition={{ duration: 0.5 }}
             className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white"
           >
-            GitHub <span className="text-brand-cyan">Metrics</span>
+            GitHub <span className="text-brand-cyan">Profile</span>
           </motion.h2>
           <motion.div
             initial={{ width: 0 }}
@@ -319,65 +29,70 @@ export const GithubStats: React.FC = () => {
           />
         </div>
 
-        {/* Dashboard Grid Layout */}
-        <div className="max-w-3xl mx-auto">
-          
-          {/* Contribution Grid panel - Span 12 */}
-          <div className="bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 p-5 md:p-6 rounded-3xl text-left shadow-2xl overflow-hidden">
-            <div className="flex items-center justify-between mb-6 border-b border-black/5 dark:border-white/5 pb-4">
-              <div>
-                <h3 className="text-base md:text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                  <GitCommit className="text-brand-cyan" size={18} />
-                  Contribution Calendar
+        {/* Dashboard Grid Layout - Entire Section Link */}
+        <motion.a 
+          href="https://github.com/ideveshtripathii" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ type: 'spring', stiffness: 100, damping: 15 }}
+          className="block max-w-4xl mx-auto group"
+        >
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+            
+            {/* GitHub Profile Card */}
+            <div className="flex flex-col items-center justify-between text-center p-6 md:p-8 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 rounded-3xl w-full max-w-md mx-auto shadow-2xl transition-all duration-300 group-hover:border-brand-cyan/30 dark:group-hover:border-brand-cyan/30 group-hover:scale-[1.01]">
+              <div className="flex flex-col items-center">
+                {/* GitHub Avatar */}
+                <div className="w-20 h-20 rounded-full p-[2px] bg-gradient-to-tr from-brand-indigo via-brand-purple to-brand-cyan mb-4 shadow-lg overflow-hidden shrink-0">
+                  <img 
+                    src="https://github.com/github.png" 
+                    alt="GitHub Profile" 
+                    className="w-full h-full object-cover rounded-full"
+                    loading="lazy"
+                  />
+                </div>
+                
+                {/* Name */}
+                <h3 className="text-lg md:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                  Devesh Tripathi
                 </h3>
-                <p className="text-xs text-gray-500 mt-1 font-mono">
-                  {computedTotalCommits} commits in the past 371 days
+                
+                {/* Username */}
+                <span className="text-xs text-brand-cyan font-mono mt-1 font-semibold">
+                  @ideveshtripathii
+                </span>
+                
+                {/* Tagline */}
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 leading-relaxed max-w-xs font-normal">
+                  Explore my projects, code repositories, and development journey on GitHub.
                 </p>
               </div>
-              <div className="flex gap-2 text-[10px] text-gray-500 font-mono items-center">
-                <span>Less</span>
-                <span className="w-2.5 h-2.5 rounded-sm bg-[#1F2937]/30" />
-                <span className="w-2.5 h-2.5 rounded-sm bg-brand-indigo/25" />
-                <span className="w-2.5 h-2.5 rounded-sm bg-brand-indigo/50" />
-                <span className="w-2.5 h-2.5 rounded-sm bg-brand-purple/75" />
-                <span className="w-2.5 h-2.5 rounded-sm bg-brand-cyan" />
-                <span>More</span>
+
+              {/* View GitHub Profile Button */}
+              <div className="mt-6">
+                <span className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-brand-indigo via-brand-purple to-brand-cyan text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-lg transition-all duration-300">
+                  View GitHub Profile
+                  <span className="text-xs">→</span>
+                </span>
               </div>
             </div>
 
-            {/* Scrollable grid box */}
-            <div className="overflow-x-auto no-scrollbar pb-6">
-              <div className="grid grid-flow-col grid-rows-7 gap-[3px] w-max select-none">
-                {contributionGrid.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className={`w-[8px] h-[8px] md:w-[9px] md:h-[9px] rounded-[1.5px] transition-transform hover:scale-125 cursor-help ${getSquareColorClass(
-                      item.level
-                    )}`}
-                    title={`${item.commits} commits on ${item.date}`}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Simple stats bar */}
-            <div className="grid grid-cols-3 gap-6 pt-6 border-t border-black/5 dark:border-white/5">
-              <div className="text-center sm:text-left">
-                <span className="text-[10px] text-gray-500 dark:text-gray-400 font-mono tracking-widest uppercase">Public Repos</span>
-                <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">{githubData.publicRepos}</p>
-              </div>
-              <div className="text-center sm:text-left">
-                <span className="text-[10px] text-gray-500 dark:text-gray-400 font-mono tracking-widest uppercase">Total Stars</span>
-                <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">{githubData.starsCount}</p>
-              </div>
-              <div className="text-center sm:text-left">
-                <span className="text-[10px] text-gray-500 dark:text-gray-400 font-mono tracking-widest uppercase">Total Commits</span>
-                <p className="text-2xl font-black text-slate-900 dark:text-white mt-1">{computedTotalCommits}</p>
-              </div>
+            {/* Top Languages Card */}
+            <div className="flex flex-col items-center justify-center p-6 md:p-8 bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 rounded-3xl w-full max-w-md mx-auto shadow-2xl transition-all duration-300 group-hover:border-brand-purple/30 dark:group-hover:border-brand-purple/30 group-hover:scale-[1.01]">
+              <img 
+                src="https://github-readme-stats.vercel.app/api/top-langs/?username=ideveshtripathii&layout=compact&theme=transparent&hide_border=true&title_color=8b5cf6&text_color=e2e8f0&icon_color=06b6d4" 
+                alt="Devesh's Top Languages" 
+                className="w-full h-auto object-contain"
+                loading="lazy"
+              />
             </div>
 
           </div>
-        </div>
+        </motion.a>
 
       </div>
     </section>

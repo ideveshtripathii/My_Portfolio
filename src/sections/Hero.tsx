@@ -38,7 +38,7 @@ export const Hero: React.FC = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center pt-32 pb-24 overflow-hidden bg-grid-pattern"
+      className="relative min-h-[85vh] flex items-center justify-center pt-32 pb-16 overflow-hidden bg-grid-pattern"
     >
       {/* Background gradients */}
       <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full bg-brand-indigo/4 blur-[100px] pointer-events-none animate-pulse-slow" />
@@ -75,7 +75,7 @@ export const Hero: React.FC = () => {
             variants={childVariants}
             className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-brand-indigo via-brand-purple to-brand-cyan bg-clip-text text-transparent"
           >
-            AI Full Stack MERN Developer
+            Gen AI Full Stack Developer
           </motion.h2>
 
           {/* Tagline */}
@@ -83,7 +83,7 @@ export const Hero: React.FC = () => {
             variants={childVariants}
             className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-xl leading-relaxed"
           >
-            Building intelligent SaaS platforms, AI-powered applications, and scalable backend architectures that power exceptional digital experiences.
+            Skilled in MERN Stack Development, TypeScript, WebSockets, Redis, REST APIs, and AI Integration.
           </motion.p>
 
           {/* Call To Actions */}

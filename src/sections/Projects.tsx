@@ -91,7 +91,7 @@ export const Projects: React.FC = () => {
   );
 
   return (
-    <section id="projects" className="py-28 md:py-36 relative overflow-hidden">
+    <section id="projects" className="py-16 md:py-20 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute right-0 bottom-1/4 w-[400px] h-[400px] rounded-full bg-brand-cyan/2 blur-[120px] pointer-events-none" />
       <div className="absolute left-0 top-1/4 w-[300px] h-[300px] rounded-full bg-brand-indigo/2 blur-[100px] pointer-events-none" />
@@ -155,14 +155,14 @@ export const Projects: React.FC = () => {
               >
 
                 {/* Visual Area (Mockup Image) - Left/Right alternates on desktop */}
-                <div className={`lg:col-span-7 w-full relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10 group aspect-[16/9] bg-slate-100 dark:bg-neutral-950 p-2 flex items-center justify-center ${index % 2 === 1 ? 'lg:order-last' : ''
+                <div className={`lg:col-span-7 w-full relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10 group aspect-[16/9] bg-slate-100 dark:bg-neutral-950 flex items-center justify-center ${index % 2 === 1 ? 'lg:order-last' : ''
                   }`}>
 
                   {/* Interactive zoom image */}
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-contain rounded-xl transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     loading="lazy"
                   />
                 </div>

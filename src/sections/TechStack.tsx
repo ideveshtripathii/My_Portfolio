@@ -78,7 +78,7 @@ export const TechStack: React.FC = () => {
   };
 
   return (
-    <section id="skills" className="py-28 md:py-36 relative bg-grid-pattern overflow-hidden">
+    <section id="skills" className="py-16 md:py-20 relative bg-grid-pattern overflow-hidden">
       {/* Decorative Blur */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-brand-indigo/2 blur-[120px] pointer-events-none" />
 

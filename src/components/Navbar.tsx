@@ -10,7 +10,6 @@ const navLinks = [
   { name: 'Projects', href: '#projects' },
   { name: 'Tech Stack', href: '#skills' },
   { name: 'GitHub', href: '#github' },
-  { name: 'Technical Writing', href: '#writing' },
   { name: 'Contact', href: '#contact' },
 ];
 

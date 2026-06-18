@@ -155,7 +155,7 @@ export const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-28 md:py-36 relative overflow-hidden bg-grid-pattern">
+    <section id="contact" className="py-16 md:py-20 relative overflow-hidden bg-grid-pattern">
       <div className="absolute bottom-1/4 left-1/4 w-[350px] h-[350px] rounded-full bg-brand-indigo/2 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
@@ -182,8 +182,8 @@ export const Contact: React.FC = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start max-w-5xl mx-auto">
           
-          {/* Left Column: Direct Contact Info cards - Span 5 */}
-          <div className="lg:col-span-5 flex flex-col gap-5">
+          {/* Left Column: Direct Contact Info cards - Span 6 */}
+          <div className="lg:col-span-6 flex flex-col gap-5">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white text-left mb-2 tracking-tight">
               Contact Information
             </h3>
@@ -217,8 +217,8 @@ export const Contact: React.FC = () => {
             ))}
           </div>
 
-          {/* Right Column: Contact Form - Span 7 */}
-          <div className="lg:col-span-7 glass p-8 rounded-3xl shadow-2xl relative">
+          {/* Right Column: Contact Form - Span 6 */}
+          <div className="lg:col-span-6 glass p-8 rounded-3xl shadow-2xl relative">
             
             <AnimatePresence mode="wait">
               {!isSuccess ? (

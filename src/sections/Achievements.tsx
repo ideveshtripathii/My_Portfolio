@@ -63,7 +63,7 @@ export const Achievements: React.FC = () => {
   };
 
   return (
-    <section id="achievements" className="py-28 md:py-36 relative overflow-hidden">
+    <section id="achievements" className="py-16 md:py-20 relative overflow-hidden">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-brand-indigo/3 blur-[120px] pointer-events-none animate-pulse-slow" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
