@@ -45,7 +45,7 @@ export const Hero: React.FC = () => {
       <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] md:w-[450px] md:h-[450px] rounded-full bg-brand-purple/4 blur-[100px] pointer-events-none animate-pulse-slow" style={{ animationDelay: '3s' }} />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center z-10">
-        
+
         {/* Left Content Column */}
         <motion.div
           className="lg:col-span-7 flex flex-col items-start"
@@ -59,7 +59,7 @@ export const Hero: React.FC = () => {
             className="flex items-center gap-2 px-3 py-1.5 rounded-full glass border border-brand-indigo/20 text-xs font-semibold tracking-wide text-brand-cyan mb-6"
           >
             <span className="w-2 h-2 rounded-full bg-brand-cyan animate-ping" />
-            Open for Developer Opportunities • MCA 2026
+            Available for Full-Time Roles & Freelance Projects
           </motion.div>
 
           {/* Heading Name */}
@@ -75,7 +75,7 @@ export const Hero: React.FC = () => {
             variants={childVariants}
             className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight mb-6 bg-gradient-to-r from-brand-indigo via-brand-purple to-brand-cyan bg-clip-text text-transparent"
           >
-            Gen AI Full Stack Developer
+            Full Stack MERN & AI Developer
           </motion.h2>
 
           {/* Tagline */}
@@ -83,7 +83,7 @@ export const Hero: React.FC = () => {
             variants={childVariants}
             className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-xl leading-relaxed"
           >
-            Skilled in MERN Stack Development, TypeScript, WebSockets, Redis, REST APIs, and AI Integration.
+            I build modern, responsive web applications using React, Node.js, TypeScript, MongoDB, Redis, and AI technologies. Whether it's a business website or an AI-powered SaaS platform, I focus on creating reliable, scalable, and user-friendly products that deliver a great experience.
           </motion.p>
 
           {/* Call To Actions */}
@@ -100,8 +100,8 @@ export const Hero: React.FC = () => {
             </button>
 
             <a
-              href="./Devesh_Tripathi_Full Stack_MERN_Developer.pdf"
-              download="Devesh_Tripathi_Full_Stack_MERN_Developer.pdf"
+              href="./Devesh_Tripathi_Full_Stack_Developer.pdf"
+              download="Devesh_Tripathi_Full_Stack_Developer.pdf"
               className="flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white font-semibold rounded-xl hover:bg-slate-200 dark:hover:bg-white/10 hover:scale-[1.03] transition-all duration-300 w-full sm:w-auto cursor-pointer"
             >
               Download Resume
@@ -120,7 +120,7 @@ export const Hero: React.FC = () => {
 
         {/* Right Interactive Visual Column */}
         <div className="lg:col-span-5 relative w-full h-[400px] flex items-center justify-center mt-10 lg:mt-0 select-none">
-          
+
           {/* Main Visual Container: Large circular image frame */}
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -141,9 +141,6 @@ export const Hero: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Interactive glow nodes surrounding the main card */}
-          <div className="absolute top-10 right-10 w-4 h-4 rounded-full bg-brand-cyan/20 blur-[2px] animate-ping" />
-          <div className="absolute bottom-10 left-10 w-3 h-3 rounded-full bg-brand-purple/30 blur-[1px] animate-pulse" />
         </div>
 
       </div>

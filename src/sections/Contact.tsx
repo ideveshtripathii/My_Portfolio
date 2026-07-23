@@ -156,12 +156,12 @@ export const Contact: React.FC = () => {
 
   return (
     <section id="contact" className="py-16 md:py-20 relative overflow-hidden bg-grid-pattern">
-      <div className="absolute bottom-1/4 left-1/4 w-[350px] h-[350px] rounded-full bg-brand-indigo/2 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/4 w-[350px] h-[350px] rounded-full bg-brand-indigo/10 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
         {/* Heading */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 max-w-2xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -176,8 +176,26 @@ export const Contact: React.FC = () => {
             whileInView={{ width: '80px' }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="h-1 bg-gradient-to-r from-brand-indigo via-brand-purple to-brand-cyan mx-auto mt-4 rounded-full"
+            className="h-1 bg-gradient-to-r from-brand-indigo via-brand-purple to-brand-cyan mx-auto mt-4 mb-6 rounded-full"
           />
+          <motion.h3
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-xl sm:text-2xl font-bold text-slate-800 dark:text-gray-200 mb-3"
+          >
+            Let's build something that lasts.
+          </motion.h3>
+          <motion.p
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 max-w-xl mx-auto leading-relaxed"
+          >
+            Open to backend and full-stack roles. Drop me a message below — or email me directly. I usually reply within a day.
+          </motion.p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start max-w-5xl mx-auto">
@@ -194,18 +212,15 @@ export const Contact: React.FC = () => {
                 href={info.link}
                 target={info.link.startsWith('http') ? '_blank' : undefined}
                 rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                className="p-5 rounded-2xl glass flex items-center gap-4 text-left shadow-lg transition-transform hover:scale-[1.02] group"
+                className="relative p-5 rounded-3xl glass flex items-center gap-4 text-left shadow-lg hover:-translate-y-1.5 hover:border-brand-cyan/40 hover:shadow-[0_20px_40px_rgba(94,106,210,0.15)] transition-all duration-500 ease-out overflow-hidden group"
               >
-                <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border ${
-                  info.color === 'cyan'
-                    ? 'bg-brand-cyan/10 border-brand-cyan/20 text-brand-cyan'
-                    : info.color === 'purple'
-                    ? 'bg-brand-purple/10 border-brand-purple/20 text-brand-purple'
-                    : 'bg-brand-indigo/10 border-brand-indigo/20 text-brand-indigo'
-                }`}>
+                {/* Corner Glow Overlay */}
+                <div className="absolute -right-12 -bottom-12 w-32 h-32 rounded-full bg-transparent blur-2xl transition-all duration-500 pointer-events-none group-hover:bg-brand-cyan/10" />
+
+                <div className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 border border-brand-cyan/20 bg-brand-cyan/10 text-brand-cyan transition-transform duration-300 group-hover:scale-110 relative z-10">
                   {info.icon}
                 </div>
-                <div className="overflow-hidden">
+                <div className="overflow-hidden relative z-10">
                   <span className="text-[10px] text-gray-500 font-mono uppercase tracking-wider block">
                     {info.name}
                   </span>
@@ -218,7 +233,9 @@ export const Contact: React.FC = () => {
           </div>
 
           {/* Right Column: Contact Form - Span 6 */}
-          <div className="lg:col-span-6 glass p-8 rounded-3xl shadow-2xl relative">
+          <div className="relative lg:col-span-6 glass p-6 md:p-8 rounded-3xl shadow-2xl transition-all duration-500 ease-out border border-black/5 dark:border-white/5 hover:border-brand-cyan/35 hover:shadow-[0_20px_40px_rgba(94,106,210,0.1)] overflow-hidden group">
+            {/* Corner Glow Overlay */}
+            <div className="absolute -right-12 -bottom-12 w-48 h-48 rounded-full bg-transparent blur-3xl transition-all duration-500 pointer-events-none group-hover:bg-brand-cyan/8" />
             
             <AnimatePresence mode="wait">
               {!isSuccess ? (
@@ -228,7 +245,7 @@ export const Contact: React.FC = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="flex flex-col gap-6 text-left"
+                  className="flex flex-col gap-6 text-left relative z-10"
                 >
                   <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
                     Send a Message
@@ -292,7 +309,7 @@ export const Contact: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-brand-indigo via-brand-purple to-brand-cyan text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:scale-100 cursor-pointer"
+                    className="flex items-center justify-center gap-2 px-6 py-3.5 text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-lg hover:shadow-[0_4px_15px_rgba(94,106,210,0.25)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:scale-100 cursor-pointer bg-gradient-to-r from-brand-indigo to-brand-cyan relative z-10"
                   >
                     {isSubmitting ? (
                       <span className="flex items-center gap-2">
@@ -317,7 +334,7 @@ export const Contact: React.FC = () => {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
-                  className="flex flex-col items-center justify-center py-12 text-center"
+                  className="flex flex-col items-center justify-center py-12 text-center relative z-10"
                 >
                   <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center mb-6">
                     <CheckCircle size={32} />

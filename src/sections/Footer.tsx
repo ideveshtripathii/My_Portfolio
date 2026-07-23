@@ -7,7 +7,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative py-12 border-t border-black/10 dark:border-white/5 overflow-hidden">
+    <footer className="relative py-12 border-t border-black/10 dark:border-white/5 overflow-hidden bg-grid-pattern">
       {/* Background glow decoration */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-brand-indigo/5 blur-[80px] pointer-events-none rounded-t-full" />
 

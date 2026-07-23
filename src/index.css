@@ -12,11 +12,11 @@
   --color-brand-cyan: var(--brand-cyan);
   --color-brand-primary-light: #0F172A;
 
-  --color-dark-bg: #090A0F;
+  --color-dark-bg: #0F111A;
   --color-dark-card: #11121A;
   --color-dark-border: rgba(255, 255, 255, 0.14);
 
-  --color-light-bg: #F8FAFC;
+  --color-light-bg: #FAF6EE;
   --color-light-card: #FFFFFF;
   --color-light-border: rgba(15, 23, 42, 0.18);
 
@@ -120,19 +120,17 @@ body {
 
 /* Subtle grid overlay inspired by Vercel/Linear blueprint style */
 .bg-grid-pattern {
-  background-size: 32px 32px;
+  background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(245, 158, 11, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(245, 158, 11, 0.08) 1px, transparent 1px);
 }
 
 .light .bg-grid-pattern {
-  background-size: 32px 32px;
+  background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(15, 23, 42, 0.015) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.015) 1px, transparent 1px),
-    radial-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(217, 119, 6, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(217, 119, 6, 0.06) 1px, transparent 1px);
 }
 
 /* Scrollbar customization */

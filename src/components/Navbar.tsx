@@ -129,8 +129,8 @@ export const Navbar: React.FC = () => {
           <div className="flex items-center gap-3">
             {/* Download CV (Desktop) */}
             <a
-              href="./Devesh_Tripathi_Full Stack_MERN_Developer.pdf"
-              download="Devesh_Tripathi_Full_Stack_MERN_Developer.pdf"
+              href="./Devesh_Tripathi_Full_Stack_Developer.pdf"
+              download="Devesh_Tripathi_Full_Stack_Developer.pdf"
               className="hidden lg:flex items-center gap-2 px-4 py-2 text-xs font-semibold tracking-wider uppercase bg-gradient-to-r from-brand-indigo to-brand-purple text-white rounded-xl shadow-md hover:scale-105 transition-all cursor-pointer"
             >
               <Download size={14} />
@@ -193,8 +193,8 @@ export const Navbar: React.FC = () => {
               })}
               <div className="mt-8 flex flex-col items-center">
                 <a
-                  href="./Devesh_Tripathi_Full Stack_MERN_Developer.pdf"
-                  download="Devesh_Tripathi_Full_Stack_MERN_Developer.pdf"
+                  href="./Devesh_Tripathi_Full_Stack_Developer.pdf"
+                  download="Devesh_Tripathi_Full_Stack_Developer.pdf"
                   className="flex items-center gap-2 px-6 py-3 text-sm font-semibold uppercase bg-gradient-to-r from-brand-indigo to-brand-purple text-white rounded-xl shadow-lg cursor-pointer"
                 >
                   <Download size={16} />

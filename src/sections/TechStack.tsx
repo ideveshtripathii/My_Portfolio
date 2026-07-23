@@ -12,54 +12,36 @@ interface TechGroup {
 
 const techGroups: TechGroup[] = [
   {
-    title: 'Frontend & Client',
-    description: 'Building highly interactive, typed, and performance-optimized client-side interfaces.',
-    icon: <Code2 size={22} />,
+    title: 'Frontend & Programming',
+    description: 'Building modern, responsive, and performance-optimized client-side interfaces and systems.',
+    icon: <Code2 size={18} />,
     color: 'cyan',
-    skills: ['React.js', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'Vite', 'Context API'],
+    skills: ['JavaScript (ES6+)', 'TypeScript', 'React.js', 'Tailwind CSS', 'Context API', 'React Router', 'HTML5 & CSS3', 'Responsive Web Design'],
   },
   {
     title: 'Backend & Systems',
-    description: 'Designing secure, scalable APIs, structured MVC patterns, and robust authentication layers.',
-    icon: <Server size={22} />,
+    description: 'Designing secure, scalable REST APIs, robust authentication layers, and backend services.',
+    icon: <Server size={18} />,
     color: 'purple',
-    skills: ['Node.js', 'Express.js', 'REST APIs', 'MVC Architecture', 'JWT Auth', 'Clerk Auth'],
+    skills: ['Node.js', 'Express.js', 'RESTful APIs', 'Socket.io', 'JWT Authentication', 'MVC Architecture', 'API Integration', 'Java'],
   },
   {
-    title: 'Real-Time & Databases',
-    description: 'Managing scalable schemas, database index optimization, Redis caching, and bi-directional message streams.',
-    icon: <Database size={22} />,
+    title: 'Database & Caching',
+    description: 'Designing database schemas, optimizing queries with indexing, and managing Redis caching.',
+    icon: <Database size={18} />,
     color: 'indigo',
-    skills: ['MongoDB', 'Mongoose', 'Database Indexing', 'Redis Caching', 'Socket.io (WebSockets)'],
+    skills: ['MongoDB', 'Mongoose', 'Database Design', 'Indexing', 'Redis'],
   },
   {
-    title: 'AI & Integrations',
-    description: 'Integrating LLMs, semantic vector embeddings, transactional billing, and automated deployments.',
-    icon: <Cpu size={22} />,
+    title: 'Tools & Technologies',
+    description: 'Integrating external services, payment gateways, authentication providers, and managing deployments.',
+    icon: <Cpu size={18} />,
     color: 'cyan',
-    skills: ['Gemini API', 'Vector Embeddings', 'Stripe Payments', 'Cloudinary', 'Git & GitHub', 'Vercel'],
+    skills: ['Gemini API', 'Stripe API', 'Clerk', 'bcryptjs', 'Vercel', 'Hostinger cPanel', 'Git & GitHub', 'Postman'],
   },
 ];
 
 export const TechStack: React.FC = () => {
-  const getGlowColor = (color: TechGroup['color']) => {
-    if (color === 'cyan') return 'group-hover:bg-brand-cyan/10';
-    if (color === 'purple') return 'group-hover:bg-brand-purple/10';
-    return 'group-hover:bg-brand-indigo/10';
-  };
-
-  const getBorderHoverColor = (color: TechGroup['color']) => {
-    if (color === 'cyan') return 'hover:border-brand-cyan/40 hover:shadow-[0_10px_30px_rgba(6,182,212,0.05)]';
-    if (color === 'purple') return 'hover:border-brand-purple/40 hover:shadow-[0_10px_30px_rgba(139,92,246,0.05)]';
-    return 'hover:border-brand-indigo/40 hover:shadow-[0_10px_30px_rgba(99,102,241,0.05)]';
-  };
-
-  const getIconBgColor = (color: TechGroup['color']) => {
-    if (color === 'cyan') return 'bg-brand-cyan/10 text-brand-cyan';
-    if (color === 'purple') return 'bg-brand-purple/10 text-brand-purple';
-    return 'bg-brand-indigo/10 text-brand-indigo';
-  };
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -80,7 +62,7 @@ export const TechStack: React.FC = () => {
   return (
     <section id="skills" className="py-16 md:py-20 relative bg-grid-pattern overflow-hidden">
       {/* Decorative Blur */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-brand-indigo/2 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-brand-indigo/10 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
 
@@ -110,46 +92,40 @@ export const TechStack: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto"
         >
           {techGroups.map((group) => (
             <motion.div
               key={group.title}
               variants={cardVariants}
-              className={`relative group p-6 md:p-8 rounded-3xl bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 transition-all duration-300 flex flex-col justify-between overflow-hidden ${getBorderHoverColor(
-                group.color
-              )}`}
+              className="relative group p-4 md:p-5 rounded-2xl bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 transition-all duration-500 ease-out flex flex-col justify-between overflow-hidden shadow-md hover:-translate-y-1.5 hover:border-brand-cyan/40 hover:shadow-[0_15px_30px_rgba(94,106,210,0.12)]"
             >
               {/* Corner Glow Overlay */}
-              <div className={`absolute -right-12 -bottom-12 w-32 h-32 rounded-full bg-transparent blur-2xl transition-all duration-500 pointer-events-none ${getGlowColor(
-                group.color
-              )}`} />
+              <div className="absolute -right-12 -bottom-12 w-32 h-32 rounded-full bg-transparent blur-2xl transition-all duration-500 pointer-events-none group-hover:bg-brand-cyan/10" />
 
               <div>
                 {/* Header */}
-                <div className="flex items-center gap-4 mb-4">
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${getIconBgColor(
-                    group.color
-                  )}`}>
+                <div className="flex items-center gap-3 mb-3.5">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border border-brand-cyan/20 bg-brand-cyan/10 text-brand-cyan transition-transform duration-300 group-hover:scale-110 relative z-10">
                     {group.icon}
                   </div>
-                  <h3 className="text-lg md:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+                  <h3 className="text-base md:text-lg font-bold text-slate-900 dark:text-white tracking-tight transition-colors duration-300 group-hover:text-brand-cyan relative z-10">
                     {group.title}
                   </h3>
                 </div>
 
                 {/* Description */}
-                <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
+                <p className="text-[11px] md:text-xs text-gray-500 dark:text-gray-400 mb-4 leading-relaxed relative z-10">
                   {group.description}
                 </p>
               </div>
 
               {/* Skills Pills Flow */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 relative z-10">
                 {group.skills.map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1.5 bg-slate-50 dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-slate-700 dark:text-gray-300 hover:text-slate-900 dark:hover:text-white text-xs font-semibold rounded-xl border border-slate-200 dark:border-white/5 hover:border-brand-cyan/30 dark:hover:border-brand-cyan/30 transition-all duration-200"
+                    className="px-2 py-0.5 bg-brand-cyan/5 dark:bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/15 dark:border-brand-cyan/20 rounded-lg text-[10px] font-semibold transition-all duration-300 hover:bg-brand-cyan/10 hover:border-brand-cyan/30"
                   >
                     {skill}
                   </span>

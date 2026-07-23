@@ -22,10 +22,10 @@ const achievementsData: Achievement[] = [
     color: 'indigo',
   },
   {
-    title: 'Developer Accelerator',
-    metric: '100xDevs Graduate',
-    sub: 'Cohort 3 Program',
-    details: 'Intensive engineering training covering modern full-stack workflows, scalable databases, and system deployment.',
+    title: 'Full Stack Web Development',
+    metric: '100xDevs Cohort 3',
+    sub: 'Certified July 2024',
+    details: 'Completed hands-on training in full-stack application development using modern JavaScript, React.js, Node.js, backend architecture, REST APIs, database management, and scalable web applications.',
     icon: <Award size={22} />,
     color: 'purple',
   },
@@ -63,8 +63,8 @@ export const Achievements: React.FC = () => {
   };
 
   return (
-    <section id="achievements" className="py-16 md:py-20 relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-brand-indigo/3 blur-[120px] pointer-events-none animate-pulse-slow" />
+    <section id="achievements" className="py-16 md:py-20 relative overflow-hidden bg-grid-pattern">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-brand-indigo/10 blur-[120px] pointer-events-none animate-pulse-slow" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
@@ -101,32 +101,23 @@ export const Achievements: React.FC = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: idx * 0.1 }}
               onClick={() => triggerConfetti(item.color)}
-              className="p-6 md:p-8 rounded-3xl bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 hover:border-slate-200 dark:hover:border-white/10 transition-colors shadow-2xl flex flex-col md:flex-row gap-6 items-start md:items-center cursor-pointer select-none group"
+              className="relative p-5 md:p-6 rounded-3xl bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 hover:border-brand-cyan/40 hover:shadow-[0_20px_40px_rgba(94,106,210,0.15)] hover:-translate-y-2 transition-all duration-500 ease-out flex flex-col md:flex-row gap-6 items-start md:items-center cursor-pointer select-none group overflow-hidden"
             >
+              {/* Corner Glow Overlay */}
+              <div className="absolute -right-12 -bottom-12 w-36 h-36 rounded-full bg-transparent blur-2xl transition-all duration-500 pointer-events-none group-hover:bg-brand-cyan/10" />
+
               {/* Icon Container with glowing borders */}
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 border transition-transform duration-300 group-hover:scale-110 ${
-                item.color === 'indigo'
-                  ? 'bg-brand-indigo/10 border-brand-indigo/20 text-brand-indigo'
-                  : item.color === 'purple'
-                  ? 'bg-brand-purple/10 border-brand-purple/20 text-brand-purple'
-                  : 'bg-brand-cyan/10 border-brand-cyan/20 text-brand-cyan'
-              }`}>
+              <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 border border-brand-cyan/20 bg-brand-cyan/10 text-brand-cyan transition-transform duration-300 group-hover:scale-110 relative z-10">
                 {item.icon}
               </div>
 
               {/* Text / Metric Description */}
-              <div className="flex-1 text-left">
+              <div className="flex-1 text-left relative z-10">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-                  <h3 className="text-xl md:text-2xl font-black text-slate-900 dark:text-white font-sans tracking-tight">
+                  <h3 className="text-xl md:text-2xl font-black text-slate-900 dark:text-white font-sans tracking-tight transition-colors duration-300 group-hover:text-brand-cyan">
                     {item.metric}
                   </h3>
-                  <span className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md self-start sm:self-center ${
-                    item.color === 'indigo'
-                      ? 'bg-brand-indigo/10 text-brand-indigo'
-                      : item.color === 'purple'
-                      ? 'bg-brand-purple/10 text-brand-purple'
-                      : 'bg-brand-cyan/10 text-brand-cyan'
-                  }`}>
+                  <span className="text-[9px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-brand-cyan/5 dark:bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/15 dark:border-brand-cyan/20 transition-all duration-300 self-start sm:self-center">
                     {item.sub}
                   </span>
                 </div>

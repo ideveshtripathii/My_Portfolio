@@ -16,15 +16,17 @@ const experienceData: ExperienceItem[] = [
   {
     role: 'Web Developer Intern',
     company: 'Navigant Technologies',
-    period: 'Jun 2026 – Present',
+    period: 'June 2026 – Present',
     type: 'professional',
     icon: <Briefcase className="text-brand-cyan" size={18} />,
-    description: 'Contributing to full-stack web application development using React.js, Node.js, Express.js, MongoDB, and TypeScript. Assisting with backend APIs, database management, quality assurance testing, and team coordination.',
+    description: 'Contributed to the development and maintenance of enterprise web applications using the MERN stack, focusing on backend development, API integration, debugging, testing, and production deployments.',
     points: [
-      'Contributing to full-stack web application development using React.js, Node.js, Express.js, MongoDB, and TypeScript',
-      'Assisting in backend API development and database management',
-      'Participating in testing, debugging, and issue resolution to improve application quality',
-      'Collaborating with team members using Git and GitHub to deliver project requirements',
+      'Developed and maintained scalable applications using React.js, Node.js, Express.js, TypeScript, and MongoDB.',
+      'Built and integrated RESTful APIs, optimized database operations, and ensured reliable data flow.',
+      'Investigated, debugged, and resolved frontend, backend, API, and database issues through root cause analysis.',
+      'Performed functional and end-to-end testing to improve software quality before production releases.',
+      'Deployed application updates, managed production environments, and monitored live releases using Hostinger cPanel.',
+      'Collaborated with cross-functional teams using Git/GitHub to deliver features, review code, and maintain application stability.',
     ],
   },
 ];
@@ -32,7 +34,7 @@ const experienceData: ExperienceItem[] = [
 export const Experience: React.FC = () => {
   return (
     <section id="experience" className="py-16 md:py-20 relative bg-grid-pattern">
-      <div className="absolute top-1/4 right-1/4 w-[350px] h-[350px] rounded-full bg-brand-purple/3 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 right-1/4 w-[350px] h-[350px] rounded-full bg-brand-purple/10 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
@@ -80,12 +82,14 @@ export const Experience: React.FC = () => {
                 </div>
 
                 {/* Main Card Content */}
-                <div className="bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 p-6 md:p-8 rounded-3xl shadow-xl">
+                <div className="relative bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl border border-black/5 dark:border-white/5 p-5 md:p-6 rounded-3xl transition-all duration-500 ease-out shadow-lg hover:border-brand-cyan/40 hover:shadow-[0_20px_40px_rgba(94,106,210,0.15)] hover:-translate-y-2 overflow-hidden group">
+                  {/* Corner Glow Overlay */}
+                  <div className="absolute -right-12 -bottom-12 w-36 h-36 rounded-full bg-transparent blur-2xl transition-all duration-500 pointer-events-none group-hover:bg-brand-cyan/10" />
                   
                   {/* Timeline Header Area */}
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4">
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4 relative z-10">
                     <div>
-                      <h3 className="text-lg md:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                      <h3 className="text-lg md:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight transition-colors duration-300 group-hover:text-brand-cyan">
                         {item.role}
                       </h3>
                       <p className="text-xs md:text-sm font-semibold text-brand-cyan mt-1 font-mono tracking-wide">
@@ -94,19 +98,19 @@ export const Experience: React.FC = () => {
                     </div>
 
                     {/* Period badge */}
-                    <div className="flex items-center gap-1.5 px-3 py-1 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full text-[10px] font-mono text-gray-500 dark:text-gray-400 font-semibold self-start md:self-center">
+                    <div className="flex items-center gap-1.5 px-2.5 py-0.5 bg-brand-cyan/5 dark:bg-brand-cyan/10 border border-brand-cyan/15 dark:border-brand-cyan/20 rounded-full text-[9px] font-mono text-brand-cyan font-semibold self-start md:self-center transition-all duration-300">
                       <Calendar size={12} />
                       {item.period}
                     </div>
                   </div>
 
                   {/* Core Description Text */}
-                  <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+                  <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mb-6 leading-relaxed relative z-10">
                     {item.description}
                   </p>
 
                   {/* Key achievement bullets */}
-                  <div className="flex flex-col gap-2.5">
+                  <div className="flex flex-col gap-2.5 relative z-10">
                     {item.points.map((pt, pIdx) => (
                       <div key={pIdx} className="flex items-start gap-2.5 text-xs text-gray-700 dark:text-gray-300">
                         <span className="w-1.5 h-1.5 rounded-full bg-brand-cyan shrink-0 mt-1.5" />

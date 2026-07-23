@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Sparkles, Server, BarChart3, CheckCircle2 } from 'lucide-react';
+import { ExternalLink, Sparkles, Server, BarChart3 } from 'lucide-react';
 import { GithubIcon } from '../components/SocialIcons';
 import promptstackImg from '../assets/Promptstack.png';
 import insiderjobsImg from '../assets/Insiderjobs.png';
@@ -12,7 +13,7 @@ interface Project {
   subtitle: string;
   description: string;
   image: string;
-  category: 'ai-saas' | 'fullstack' | 'frontend-api';
+  category: 'fullstack' | 'frontend-api';
   tags: string[];
   liveLink: string;
   githubLink: string;
@@ -24,44 +25,42 @@ const projectsData: Project[] = [
   {
     id: 'promptstack',
     title: 'PromptStack',
-    subtitle: 'AI SaaS & Image Generation Platform',
-    description: 'AI-powered SaaS platform featuring real-time chat, image generation, secure payments, and scalable backend architecture.',
+    subtitle: 'AI SaaS Platform',
+    description: 'A production-ready AI SaaS platform featuring real-time conversational AI, image generation, and secure user authentication.',
     image: promptstackImg,
-    category: 'ai-saas',
-    tags: ['React 19', 'Node.js', 'Express', 'MongoDB', 'Socket.io', 'Stripe', 'Redis', 'Gemini API', 'ImageKit'],
+    category: 'fullstack',
+    tags: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Socket.io', 'Redis', 'Stripe', 'Gemini API'],
     liveLink: 'https://promptstack-ai.vercel.app',
     githubLink: 'https://github.com/ideveshtripathii/PromptStack',
     icon: <Sparkles className="text-brand-cyan" size={20} />,
     highlights: [
-      'Built a scalable AI SaaS platform supporting 100+ users using WebSockets, Redis, and event-driven architecture',
-      'Implemented real-time response streaming (Socket.io) achieving sub-100ms latency',
-      'Developed context-aware chat system with MongoDB and vector embeddings for multi-turn interactions',
-      'Integrated Stripe-based credit system with secure webhook handling for automated billing',
+      'Built a production-ready AI SaaS platform with real-time conversational AI, image generation, and secure user authentication.',
+      'Implemented WebSocket-based streaming using Socket.io with Redis caching to improve chat performance and user experience.',
+      'Developed a credit-based payment system using Stripe Checkout and Svix webhooks with JWT authentication and ImageKit integration.',
     ],
   },
   {
     id: 'insiderjobs',
     title: 'InsiderJobs',
     subtitle: 'Full Stack Job Portal',
-    description: 'Production-ready recruitment platform with secure authentication, recruiter dashboards, and optimized hiring workflows.',
+    description: 'AI-powered MERN job portal featuring role-based access, AI resume parsing, mock interviews, recruiter dashboard, Clerk authentication, and Redis caching for faster data retrieval.',
     image: insiderjobsImg,
     category: 'fullstack',
-    tags: ['React', 'Node.js', 'Express', 'MongoDB', 'TypeScript', 'Clerk', 'Cloudinary'],
+    tags: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'TypeScript', 'Clerk', 'Cloudinary', 'Redis'],
     liveLink: 'https://insiderjobsfullstack.vercel.app',
     githubLink: 'https://github.com/ideveshtripathii/Insiderjobs',
-    icon: <Server className="text-brand-purple" size={20} />,
+    icon: <Server className="text-brand-cyan" size={20} />,
     highlights: [
-      'Developed a scalable full-stack job portal with role-based access control (RBAC) and RESTful APIs supporting complete CRUD operations',
-      'Optimized backend performance by implementing MongoDB indexing and query optimization, reducing response time by ~30%',
-      'Integrated Clerk authentication with secure session management and Cloudinary for efficient file and media storage',
-      'Designed and implemented recruiter and user dashboards for job management, application tracking, and status workflows',
+      'Developed an AI-powered job portal featuring role-based access control (RBAC), AI resume parsing, mock interviews, and recruiter dashboards.',
+      'Built secure APIs with Clerk authentication and integrated Redis caching to optimize data retrieval and API response times.',
+      'Implemented recruiter features with Quill editor, Cloudinary media storage, optimized database operations, and Sentry error monitoring.',
     ],
   },
   {
     id: 'weatherscope',
     title: 'WeatherScope',
     subtitle: 'Real-time Weather Dashboard',
-    description: 'Real-time weather analytics dashboard with geolocation forecasting, 2-year historical data exploration, and interactive charting.',
+    description: 'High-performance React weather dashboard providing real-time weather forecasts, air quality insights, and 2-year historical weather analytics.',
     image: weatherscopeImg,
     category: 'frontend-api',
     tags: ['React', 'Vite', 'Tailwind CSS', 'Open-Meteo API', 'Recharts'],
@@ -78,7 +77,6 @@ const projectsData: Project[] = [
 
 const filterOptions = [
   { label: 'All Projects', value: 'all' },
-  { label: 'AI & SaaS', value: 'ai-saas' },
   { label: 'Full Stack', value: 'fullstack' },
   { label: 'Frontend / APIs', value: 'frontend-api' },
 ];
@@ -90,22 +88,35 @@ export const Projects: React.FC = () => {
     (project) => filter === 'all' || project.category === filter
   );
 
-  return (
-    <section id="projects" className="py-16 md:py-20 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute right-0 bottom-1/4 w-[400px] h-[400px] rounded-full bg-brand-cyan/2 blur-[120px] pointer-events-none" />
-      <div className="absolute left-0 top-1/4 w-[300px] h-[300px] rounded-full bg-brand-indigo/2 blur-[100px] pointer-events-none" />
+  React.useEffect(() => {
+    const section = sessionStorage.getItem('scrollToSection');
+    if (section) {
+      sessionStorage.removeItem('scrollToSection');
+      const el = document.getElementById(section);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      }
+    }
+  }, []);
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+  return (
+    <section id="projects" className="py-16 md:py-20 relative overflow-hidden bg-grid-pattern">
+      {/* Background decoration */}
+      <div className="absolute right-0 bottom-1/4 w-[400px] h-[400px] rounded-full bg-brand-cyan/10 blur-[120px] pointer-events-none" />
+      <div className="absolute left-0 top-1/4 w-[300px] h-[300px] rounded-full bg-brand-indigo/10 blur-[100px] pointer-events-none" />
+
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
 
         {/* Section Heading */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white"
+            className="text-3xl sm:text-4xl font-black tracking-tight text-slate-900 dark:text-white"
           >
             Featured <span className="text-brand-cyan">Projects</span>
           </motion.h2>
@@ -114,20 +125,20 @@ export const Projects: React.FC = () => {
             whileInView={{ width: '80px' }}
             viewport={{ once: true }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="h-1 bg-gradient-to-r from-brand-indigo via-brand-purple to-brand-cyan mx-auto mt-4 rounded-full"
+            className="h-1 bg-gradient-to-r from-brand-indigo via-brand-purple to-brand-cyan mx-auto mt-3 rounded-full"
           />
         </div>
 
         {/* Filter Tabs */}
-        <div className="flex justify-center overflow-x-auto pb-4 mb-12 gap-2 no-scrollbar px-1">
-          <div className="flex bg-slate-100 dark:bg-neutral-900 border border-slate-200 dark:border-white/5 p-1 rounded-2xl">
+        <div className="flex justify-center overflow-x-auto pb-3 mb-8 gap-2 no-scrollbar px-1">
+          <div className="flex bg-slate-100 dark:bg-neutral-900 border border-slate-200 dark:border-white/5 p-1 rounded-xl">
             {filterOptions.map((opt) => {
               const isActive = filter === opt.value;
               return (
                 <button
                   key={opt.value}
                   onClick={() => setFilter(opt.value)}
-                  className={`px-5 py-2.5 rounded-xl text-xs font-semibold tracking-wider transition-all duration-300 whitespace-nowrap cursor-pointer ${isActive
+                  className={`px-4 py-2 rounded-lg text-[11px] font-semibold tracking-wider transition-all duration-300 whitespace-nowrap cursor-pointer ${isActive
                     ? 'bg-white dark:bg-white/10 text-slate-900 dark:text-white font-bold shadow-sm'
                     : 'text-slate-500 hover:text-slate-800 dark:text-gray-400 dark:hover:text-white'
                     }`}
@@ -139,100 +150,85 @@ export const Projects: React.FC = () => {
           </div>
         </div>
 
-        {/* Projects Cards Container */}
-        <div className="flex flex-col gap-12 lg:gap-20">
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => (
+            {filteredProjects.map((project) => (
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.6, ease: 'easeOut' }}
-                className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center border border-black/5 dark:border-white/5 p-6 lg:p-10 rounded-3xl bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl hover:border-slate-200 dark:hover:border-white/10 transition-colors duration-300 shadow-2xl"
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className="relative flex flex-col group border border-black/5 dark:border-white/5 p-4 rounded-2xl bg-white/90 dark:bg-neutral-900/90 backdrop-blur-xl transition-all duration-500 ease-out shadow-md hover:-translate-y-1.5 overflow-hidden hover:border-brand-cyan/40 hover:shadow-[0_15px_30px_rgba(94,106,210,0.12)]"
               >
+                {/* Corner Glow Overlay */}
+                <div className="absolute -right-12 -bottom-12 w-32 h-32 rounded-full bg-transparent blur-2xl transition-all duration-500 pointer-events-none group-hover:bg-brand-cyan/5" />
 
-                {/* Visual Area (Mockup Image) - Left/Right alternates on desktop */}
-                <div className={`lg:col-span-7 w-full relative rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-white/10 group aspect-[16/9] bg-slate-100 dark:bg-neutral-950 flex items-center justify-center ${index % 2 === 1 ? 'lg:order-last' : ''
-                  }`}>
+                <Link to={`/project/${project.id}`} className="flex flex-col flex-grow cursor-pointer">
+                  {/* Visual Area (Mockup Image) */}
+                  <div className="w-full relative rounded-xl overflow-hidden aspect-[16/9] bg-slate-100 dark:bg-neutral-950 border border-slate-200 dark:border-white/10 flex items-center justify-center mb-4">
+                    {/* Floating Category Badge */}
+                    <div className="absolute top-2.5 left-2.5 z-10 flex items-center gap-1 px-2 py-0.5 bg-slate-950/75 dark:bg-neutral-950/75 backdrop-blur-md rounded-lg border border-white/10 text-white text-[9px] font-bold tracking-wider uppercase">
+                      {project.icon}
+                      <span>{project.subtitle}</span>
+                    </div>
 
-                  {/* Interactive zoom image */}
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-                    loading="lazy"
-                  />
-                </div>
-
-                {/* Information Area - Left/Right alternates */}
-                <div className="lg:col-span-5 flex flex-col items-start text-left">
-
-                  {/* Category icon / Subtitle */}
-                  <div className="flex items-center gap-2 mb-3">
-                    {project.icon}
-                    <span className="text-[11px] font-mono tracking-widest text-brand-purple uppercase font-bold">
-                      {project.subtitle}
-                    </span>
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"
+                      loading="lazy"
+                    />
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-                    {project.title}
-                  </h3>
+                  {/* Information Area */}
+                  <div className="flex flex-col flex-grow items-start text-left relative z-10">
+                    {/* Title */}
+                    <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1.5 tracking-tight transition-colors duration-300 group-hover:text-brand-cyan">
+                      {project.title}
+                    </h3>
 
-                  {/* Tagline / Description */}
-                  <p className="text-gray-600 dark:text-gray-400 mb-6 text-sm leading-relaxed">
-                    {project.description}
-                  </p>
+                    {/* Tagline / Description */}
+                    <p className="text-gray-600 dark:text-gray-400 mb-3.5 text-xs leading-relaxed min-h-[48px]">
+                      {project.description}
+                    </p>
 
-                  {/* Feature Highlights Accordion */}
-                  <div className="flex flex-col gap-2.5 w-full mb-8">
-                    {project.highlights.map((highlight, hIdx) => (
-                      <div key={hIdx} className="flex items-start gap-2 text-xs text-gray-700 dark:text-gray-300">
-                        <CheckCircle2 size={14} className="text-brand-cyan shrink-0 mt-0.5" />
-                        <span className="leading-relaxed font-normal">{highlight}</span>
-                      </div>
-                    ))}
+                    {/* Tech stack badges */}
+                    <div className="flex flex-wrap gap-1 mb-4 mt-auto">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-0.5 text-[8.5px] font-mono rounded-full border font-semibold transition-all duration-300 bg-brand-cyan/5 dark:bg-brand-cyan/10 text-brand-cyan border-brand-cyan/15 dark:border-brand-cyan/20"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
                   </div>
+                </Link>
 
-                  {/* Tech stack badges */}
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2.5 py-1 bg-slate-100 dark:bg-white/5 text-gray-600 dark:text-gray-300 text-[10px] font-mono rounded-md border border-slate-200 dark:border-white/5 font-semibold"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                {/* Actions buttons */}
+                <div className="flex items-center gap-2.5 w-full mt-1.5 relative z-20">
+                  <Link
+                    to={`/project/${project.id}`}
+                    className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 text-white text-[10px] font-bold uppercase tracking-wider rounded-lg shadow-sm transition-all duration-300 cursor-pointer bg-gradient-to-r from-brand-indigo to-brand-cyan hover:shadow-[0_4px_10px_rgba(94,106,210,0.15)] hover:scale-[1.02]"
+                  >
+                    <ExternalLink size={11} />
+                    Case Study
+                  </Link>
 
-                  {/* Actions buttons */}
-                  <div className="flex items-center gap-4">
-                    <a
-                      href={project.liveLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-brand-indigo to-brand-purple text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
-                    >
-                      <ExternalLink size={14} />
-                      Live Demo
-                    </a>
-
-                    <a
-                      href={project.githubLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 px-5 py-2.5 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-white text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-slate-200 dark:hover:bg-white/10 hover:scale-105 transition-all duration-300 cursor-pointer"
-                    >
-                      <GithubIcon size={14} />
-                      Source Code
-                    </a>
-                  </div>
-
+                  <a
+                    href={project.githubLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-1 px-3 py-1.5 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 text-[10px] font-bold uppercase tracking-wider rounded-lg hover:bg-slate-100 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/20 hover:scale-[1.01] transition-all duration-300 cursor-pointer"
+                  >
+                    <GithubIcon size={11} />
+                    Code
+                  </a>
                 </div>
 
               </motion.div>
