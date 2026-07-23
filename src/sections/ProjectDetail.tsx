@@ -184,7 +184,7 @@ export const ProjectDetail: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent text-slate-900 dark:text-gray-100 flex flex-col transition-colors duration-500 overflow-y-auto lg:overflow-hidden relative">
+    <div className="min-h-screen lg:h-screen bg-transparent text-slate-900 dark:text-gray-100 flex flex-col transition-colors duration-500 overflow-y-auto lg:overflow-hidden relative">
       {/* Background patterns */}
       <div className="absolute right-0 top-0 w-[500px] h-[500px] rounded-full bg-brand-cyan/5 blur-[120px] pointer-events-none" />
       <div className="absolute left-0 bottom-0 w-[400px] h-[400px] rounded-full bg-brand-purple/5 blur-[120px] pointer-events-none" />
@@ -484,7 +484,7 @@ export const ProjectDetail: React.FC = () => {
           </div>
 
           {/* Browser Device mockup wrapper container */}
-          <div className={`w-full flex-1 min-h-0 flex items-center justify-center transition-all duration-300 ${getViewportWidth()}`}>
+          <div className={`w-full flex-1 min-h-0 flex items-stretch justify-center transition-all duration-300 ${getViewportWidth()}`}>
             
             <div className="w-full h-full rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-neutral-950 shadow-2xl flex flex-col overflow-hidden relative">
               
