@@ -225,7 +225,7 @@ export const ProjectDetail: React.FC = () => {
       </header>
 
       {/* Split Layout Container */}
-      <div className="flex-1 flex flex-col lg:flex-row lg:overflow-hidden relative z-10">
+      <div className="flex-none lg:flex-1 flex flex-col lg:flex-row lg:overflow-hidden relative z-10">
         
         {/* Left Side: Case Study Description */}
         <aside className="w-full lg:w-[42%] border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-white/5 overflow-y-visible lg:overflow-y-auto p-6 md:p-8 flex flex-col shrink-0 lg:shrink scrollbar-thin scrollbar-thumb-brand-cyan/20">
@@ -426,7 +426,7 @@ export const ProjectDetail: React.FC = () => {
         </aside>
 
         {/* Right Side: Interactive Browser Sandbox preview */}
-        <main className="flex-1 bg-slate-100/40 dark:bg-neutral-900/20 backdrop-blur-[2px] p-4 md:p-6 flex flex-col justify-center items-center overflow-hidden h-[500px] sm:h-[600px] md:h-[750px] lg:h-full shrink-0 lg:shrink">
+        <main className="flex-none lg:flex-1 bg-slate-100/40 dark:bg-neutral-900/20 backdrop-blur-[2px] p-4 md:p-6 flex flex-col justify-center items-center overflow-hidden h-[600px] sm:h-[700px] md:h-[850px] lg:h-full">
           
           {/* Viewport resizing bar */}
           <div className="w-full max-w-full flex items-center justify-between mb-4 bg-white/60 dark:bg-neutral-900/60 backdrop-blur-md border border-slate-200 dark:border-white/5 p-2 rounded-2xl shadow-sm z-10">
@@ -484,7 +484,7 @@ export const ProjectDetail: React.FC = () => {
           </div>
 
           {/* Browser Device mockup wrapper container */}
-          <div className={`w-full h-full flex items-center justify-center flex-grow transition-all duration-300 ${getViewportWidth()}`}>
+          <div className={`w-full flex-1 min-h-0 flex items-center justify-center transition-all duration-300 ${getViewportWidth()}`}>
             
             <div className="w-full h-full rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-neutral-950 shadow-2xl flex flex-col overflow-hidden relative">
               
@@ -499,7 +499,7 @@ export const ProjectDetail: React.FC = () => {
               </div>
 
               {/* View Frame Area */}
-              <div className="flex-grow w-full relative bg-white dark:bg-neutral-950">
+              <div className="flex-grow min-h-0 w-full relative bg-white dark:bg-neutral-950">
                 
                 {/* Loader Screen */}
                 {!iframeLoaded && (
