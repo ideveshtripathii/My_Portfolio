@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
-  ArrowLeft, 
-  Monitor, 
-  Tablet, 
-  Smartphone, 
-  ExternalLink, 
-  Database, 
-  Cpu, 
-  Layers, 
+import {
+  ArrowLeft,
+  Monitor,
+  Tablet,
+  Smartphone,
+  ExternalLink,
+  Database,
+  Cpu,
+  Layers,
   RotateCcw,
   Sparkles,
   Server,
@@ -191,8 +191,8 @@ export const ProjectDetail: React.FC = () => {
 
       {/* Header Bar */}
       <header className="sticky top-0 z-40 bg-white/40 dark:bg-[#0F111A]/40 backdrop-blur-md border-b border-slate-200 dark:border-white/5 px-6 py-4 flex items-center justify-between">
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           onClick={() => {
             sessionStorage.setItem('scrollToSection', 'projects');
           }}
@@ -226,10 +226,10 @@ export const ProjectDetail: React.FC = () => {
 
       {/* Split Layout Container */}
       <div className="flex-none lg:flex-1 flex flex-col lg:flex-row lg:overflow-hidden relative z-10">
-        
+
         {/* Left Side: Case Study Description */}
         <aside className="w-full lg:w-[42%] border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-white/5 overflow-y-visible lg:overflow-y-auto p-6 md:p-8 flex flex-col shrink-0 lg:shrink scrollbar-thin scrollbar-thumb-brand-cyan/20">
-          
+
           {/* Project Title & Badge */}
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-2 text-xs font-bold uppercase tracking-widest text-brand-cyan">
@@ -244,7 +244,7 @@ export const ProjectDetail: React.FC = () => {
           {/* Action buttons */}
           <div className="flex flex-wrap gap-2.5 mb-8">
             {study.tags.map((tag) => (
-              <span 
+              <span
                 key={tag}
                 className="px-2.5 py-1 text-[10px] font-semibold font-mono rounded-full bg-brand-cyan/5 dark:bg-brand-cyan/10 border border-brand-cyan/15 dark:border-brand-cyan/20 text-brand-cyan transition-all"
               >
@@ -259,11 +259,10 @@ export const ProjectDetail: React.FC = () => {
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`pb-3 text-xs md:text-sm font-bold uppercase tracking-wider border-b-2 transition-all relative ${
-                  activeTab === tab 
-                    ? 'border-brand-cyan text-brand-cyan dark:text-white font-extrabold' 
+                className={`pb-3 text-xs md:text-sm font-bold uppercase tracking-wider border-b-2 transition-all relative ${activeTab === tab
+                    ? 'border-brand-cyan text-brand-cyan dark:text-white font-extrabold'
                     : 'border-transparent text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white'
-                }`}
+                  }`}
               >
                 {tab}
               </button>
@@ -275,7 +274,7 @@ export const ProjectDetail: React.FC = () => {
             <div>
               {/* Tab 1: Overview */}
               {activeTab === 'overview' && (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="space-y-6 text-sm text-gray-600 dark:text-gray-300 leading-relaxed"
@@ -283,7 +282,7 @@ export const ProjectDetail: React.FC = () => {
                   <p className="font-medium text-gray-900 dark:text-white text-base whitespace-pre-line">
                     {study.overview}
                   </p>
-                  
+
                   <div>
                     <h4 className="text-xs font-black uppercase tracking-wider text-brand-cyan mb-2.5">
                       The Challenge
@@ -306,7 +305,7 @@ export const ProjectDetail: React.FC = () => {
 
               {/* Tab 2: Features */}
               {activeTab === 'features' && (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="space-y-4"
@@ -324,7 +323,7 @@ export const ProjectDetail: React.FC = () => {
 
               {/* Tab 3: Architecture & System Details */}
               {activeTab === 'architecture' && (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="space-y-6"
@@ -419,15 +418,14 @@ export const ProjectDetail: React.FC = () => {
 
             {/* Note info bottom */}
             <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/5 text-[10px] md:text-xs text-gray-500 flex justify-between items-center bg-transparent">
-              <span>Case study page: Option 1</span>
-              <span>Performance Optimized</span>
+
             </div>
           </div>
         </aside>
 
         {/* Right Side: Interactive Browser Sandbox preview */}
         <main className="flex-none lg:flex-1 bg-slate-100/40 dark:bg-neutral-900/20 backdrop-blur-[2px] p-4 md:p-6 flex flex-col justify-center items-center overflow-hidden h-[600px] sm:h-[700px] md:h-[850px] lg:h-full">
-          
+
           {/* Viewport resizing bar */}
           <div className="w-full max-w-full flex items-center justify-between mb-4 bg-white/60 dark:bg-neutral-900/60 backdrop-blur-md border border-slate-200 dark:border-white/5 p-2 rounded-2xl shadow-sm z-10">
             <div className="flex gap-1">
@@ -444,11 +442,10 @@ export const ProjectDetail: React.FC = () => {
                   <button
                     key={mode}
                     onClick={() => setViewport(mode)}
-                    className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors cursor-pointer ${
-                      isActive 
-                        ? 'bg-brand-cyan/15 text-brand-cyan dark:text-white border border-brand-cyan/25' 
+                    className={`w-8 h-8 rounded-lg flex items-center justify-center transition-colors cursor-pointer ${isActive
+                        ? 'bg-brand-cyan/15 text-brand-cyan dark:text-white border border-brand-cyan/25'
                         : 'text-gray-400 hover:text-gray-700 dark:hover:text-white'
-                    }`}
+                      }`}
                     title={`Rescale to ${mode}`}
                   >
                     {getIcon()}
@@ -485,9 +482,9 @@ export const ProjectDetail: React.FC = () => {
 
           {/* Browser Device mockup wrapper container */}
           <div className={`w-full flex-1 min-h-0 flex items-stretch justify-center transition-all duration-300 ${getViewportWidth()}`}>
-            
+
             <div className="w-full h-full rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-neutral-950 shadow-2xl flex flex-col overflow-hidden relative">
-              
+
               {/* macOS layout titlebar dots */}
               <div className="px-4 py-2.5 bg-slate-50 dark:bg-neutral-900 border-b border-slate-200 dark:border-white/5 flex items-center gap-1.5 select-none shrink-0">
                 <span className="w-3 h-3 rounded-full bg-red-400" />
@@ -500,7 +497,7 @@ export const ProjectDetail: React.FC = () => {
 
               {/* View Frame Area */}
               <div className="flex-grow min-h-0 w-full relative bg-white dark:bg-neutral-950">
-                
+
                 {/* Loader Screen */}
                 {!iframeLoaded && (
                   <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-slate-50 dark:bg-neutral-950 gap-4 transition-colors duration-500">

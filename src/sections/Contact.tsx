@@ -159,7 +159,7 @@ export const Contact: React.FC = () => {
       <div className="absolute bottom-1/4 left-1/4 w-[350px] h-[350px] rounded-full bg-brand-indigo/10 blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        
+
         {/* Heading */}
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <motion.h2
@@ -199,13 +199,13 @@ export const Contact: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start max-w-5xl mx-auto">
-          
+
           {/* Left Column: Direct Contact Info cards - Span 6 */}
           <div className="lg:col-span-6 flex flex-col gap-5">
             <h3 className="text-xl font-bold text-slate-900 dark:text-white text-left mb-2 tracking-tight">
               Contact Information
             </h3>
-            
+
             {contactInfoData.map((info, idx) => (
               <a
                 key={idx}
@@ -236,7 +236,7 @@ export const Contact: React.FC = () => {
           <div className="relative lg:col-span-6 glass p-6 md:p-8 rounded-3xl shadow-2xl transition-all duration-500 ease-out border border-black/5 dark:border-white/5 hover:border-brand-cyan/35 hover:shadow-[0_20px_40px_rgba(94,106,210,0.1)] overflow-hidden group">
             {/* Corner Glow Overlay */}
             <div className="absolute -right-12 -bottom-12 w-48 h-48 rounded-full bg-transparent blur-3xl transition-all duration-500 pointer-events-none group-hover:bg-brand-cyan/8" />
-            
+
             <AnimatePresence mode="wait">
               {!isSuccess ? (
                 <motion.form
@@ -262,7 +262,7 @@ export const Contact: React.FC = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Devesh Tripathi"
+                      placeholder="Your full name"
                       className="w-full px-4 py-3 rounded-xl bg-slate-100/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 focus:border-brand-cyan focus:outline-none text-sm text-slate-800 dark:text-white transition-colors"
                       disabled={isSubmitting}
                     />
@@ -280,7 +280,7 @@ export const Contact: React.FC = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="deveshbiksi@gmail.com"
+                      placeholder="your@email.com"
                       className="w-full px-4 py-3 rounded-xl bg-slate-100/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 focus:border-brand-cyan focus:outline-none text-sm text-slate-800 dark:text-white transition-colors"
                       disabled={isSubmitting}
                     />
@@ -298,7 +298,7 @@ export const Contact: React.FC = () => {
                       rows={5}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Hi Devesh, I would love to discuss a project..."
+                      placeholder="Hi Devesh, I'd like to discuss a project with you..."
                       className="w-full px-4 py-3 rounded-xl bg-slate-100/50 dark:bg-white/5 border border-slate-200 dark:border-white/10 focus:border-brand-cyan focus:outline-none text-sm text-slate-800 dark:text-white transition-colors resize-none"
                       disabled={isSubmitting}
                     />
